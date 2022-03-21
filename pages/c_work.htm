@@ -1,0 +1,343 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+ <meta charset="utf-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <meta name="description" content="">
+ <meta name="author" content="do.sibsutis.ru">
+
+ <title>Контрольная работа. Сетевое программирование</title>
+
+ <link rel="icon" type="image/png" href="../lib/css/favicon.png">
+ <!-- Bootstrap Core CSS -->
+ <link href="../lib/css/bootstrap.css" rel="stylesheet">
+
+ <!-- Custom CSS -->
+ <link href="../lib/css/scrolling-nav.css" rel="stylesheet">
+
+ <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+ <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+ <!--[if lt IE 9]>
+ <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+ <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+ <![endif]-->
+</head>
+
+<!-- The #page-top ID is part of the scrolling feature - the data-spy and data-target are part of the built-in Bootstrap scrollspy function -->
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+ <!-- Navigation -->
+<nav class="navbar navbar-default navbar-fixed-top">
+ <div class="container">
+ <!-- Brand and toggle get grouped for better mobile display -->
+ <div class="navbar-header">
+ <li class="hidden"> <a class="page-scroll" href="#page-top"></a> </li>
+
+ <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+ <span class="icon-bar"></span>
+ <span class="icon-bar"></span>
+ <span class="icon-bar"></span>
+ </button>
+
+ <a class="navbar-brand " href="../index.htm">
+ <text class = "hidden-xs">Сетевое программирование</text>
+ <text class = "visible-xs">СП</text>
+ </a>
+ </div>
+
+ <!-- Collect the nav links, forms, and glyphicon glyphicon-list-alt content for toggling -->
+ <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+ <!-- <ul class="nav navbar-nav">
+ <li><a href="#"></a></li>
+ </ul> -->
+
+ <ul class="nav navbar-nav navbar-right">
+ <li class="dropdown">
+ <button type="button" class="navbar-toggle dropdown-toggle hidden-xs" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+ <span class="icon-bar"></span>
+ <span class="icon-bar"></span>
+ <span class="icon-bar"></span>
+ </button>
+ <a class = "dropdown-toggle visible-xs" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Материалы</a>
+  
+ <ul class="dropdown-menu">
+  
+ <li><a href="../index.htm">Аннотация курса</a></li>
+  
+ <li role="separator" class="divider"></li>
+  
+ <li><a href="lec_index.htm">Теория</a></li>
+  
+<li><a href="c_work.htm">Курсовая работа</a></li>
+ 
+ <li><a href="labs.htm">Лабораторные работы</a></li>
+ 
+ <li role="separator" class="divider"></li>
+     
+   
+  <li><a href="lit.htm">Литература</a></li>
+  
+
+  <!--li><a href="q.htm">Вопросы для самопроверки</a></li-->			
+   </ul>
+ </li>
+ </ul>
+ </div><!-- /.navbar-collapse -->
+ </div><!-- /.container-fluid -->
+</nav>
+
+
+ <div id="intro" class="section content-section ">
+ 
+<div class="container">
+ <div class="row">
+ <div class="col-lg-12">
+
+ 
+ <div class="page-header">
+  <h3>Курсовая работа</h3>
+ </div>
+
+
+<h2>Задание на выполнение курсовой работы </h2>
+
+<br>
+<div class="row">
+<div class="col-md-7">
+   
+<a class="btn btn-primary btn-block" href="work.doc">Скачать задание к курсовой работе в формате DOC Microsoft Word</a>
+</div>
+</div><br>
+
+
+<p>Разработать программное приложение реализующее принципы организации взаимодействия в сети TCP/IP в соответствии с архитектурой «клиент-сервер». Приложение выполнить в среде разработки, поддерживающей технологию Winsock API. </p>
+<p>Постановка задачи:</p>
+<p class=punkt>1.	После установления связи пользователь набирает на клавиатуре программы-клиент сообщения, соответствующие командам протокола FTP или командам OS. </p>
+<p class=punkt>2.	Программа-клиент отправляет их серверу. </p>
+<p class=punkt>3.	Программа-сервер распознаёт команды, выполняет действия по реализации этих команд, формирует и отправляет в канал результаты выполнения. </p>
+<p class=punkt>4.	Программа-клиент принимает эти сообщения и отображает их на экране. </p>
+<p class=punkt>5.	Передача команд может производиться в любой последовательности. Завершение работы по команде <b>bye</b>.</p>
+<p>Пример реализации программ клиента и сервера можно посмотреть в лекциях описания соответствующего протокола.</p>
+<h3>СОДЕРЖАНИЕ ОТЧЕТА ПО КУРСОВОЙ РАБОТЕ</h3>
+<p class=punkt>1.	Титульный лист</p>
+<p class=punkt>2.	Задание для курсовой работы</p>
+<p class=punkt>3.	Описание структуры программ клиента и сервера</p>
+<p class=punkt>4.	Описание работы программ клиента и сервера</p>
+<p class=punkt>5.	Описание основных функций, используемых в приложении.</p>
+<p class=punkt>6.	Тексты программы-клиента и программы-сервера с подробными комментариями.</p>
+<p class=punkt>7.	Результаты выполнения в виде скриншотов экрана с пояснениями для каждого скриншота.</p>
+<p class=punkt>8.	Используемая литература</p>
+
+<br>
+ 
+
+<div class="row">
+ <div class="col-lg-9">
+<div class="alert alert-warning"><h4><br></h4>Номер варианта курсовой работы должен соответствовать последней цифре вашего пароля. </div></div></div><br>
+
+<h3>ВАРИАНТЫ ЗАДАНИЙ</h3><br>
+<div class="row">
+<div class="col-lg-8">
+<table class="table table-hover table-condensed table-striped">
+ 
+<tr>
+ <td width=100 rowspan=1 valign=top>
+<p><b>Варианты</b></p>
+ </td>
+ 
+<td width=250 colspan=1 valign=top>
+ <p><b>Команды со стороны клиента</b></p>
+ </td>
+<td width=250 colspan=1 valign=top>
+ <p><b>Примечание</b></p>
+ </td>
+</tr>
+ 
+<tr>
+ <td width=100 rowspan=1 valign=top>
+<p>0</p>
+ </td>
+ 
+<td width=250 colspan=1 valign=top>
+ <p>Ls, Cd имя_директории, pwd</p>
+ </td>
+
+<td width=250 colspan=1 valign=top>
+ <p> </p>
+ </td>
+
+</tr>
+
+<tr>
+ <td width=100 rowspan=1 valign=top>
+<p>1</p>
+ </td>
+ 
+<td width=250 colspan=1 valign=top>
+ <p>Dir, Put имя_файла, pwd</p>
+ </td>
+
+<td width=250 colspan=1 valign=top>
+ <p> </p>
+ </td>
+
+</tr>
+ 
+<tr>
+ <td width=100 rowspan=1 valign=top>
+<p>2</p>
+ </td>
+ 
+<td width=250 colspan=1 valign=top>
+ <p>Dir, Get имя_файла, pwd</p>
+ </td>
+
+<td width=250 colspan=1 valign=top>
+ <p> </p>
+ </td>
+
+</tr>
+<tr>
+ <td width=100 rowspan=1 valign=top>
+<p>3</p>
+ </td>
+ 
+<td width=250 colspan=1 valign=top>
+ <p>Chat</p>
+ </td>
+
+<td width=250 colspan=1 valign=top>
+ <p>Установить режим обмена текстовыми сообщениями (как стороны клиента, так и сервера) </p>
+ </td>
+
+</tr>
+ 
+
+ <tr>
+ <td width=100 rowspan=1 valign=top>
+<p>4</p>
+ </td>
+ 
+<td width=250 colspan=1 valign=top>
+ <p>Cd имя_директории,  pwd</p>
+ </td>
+
+<td width=250 colspan=1 valign=top>
+ <p> </p>
+ </td>
+
+</tr>
+<tr>
+ <td width=100 rowspan=1 valign=top>
+<p>5</p>
+ </td>
+ 
+<td width=250 colspan=1 valign=top>
+ <p>Ls, mPut шаблон,  pwd</p>
+ </td>
+
+<td width=250 colspan=1 valign=top>
+ <p> </p>
+ </td>
+
+</tr>
+<tr>
+ <td width=100 rowspan=1 valign=top>
+<p>6</p>
+ </td>
+ 
+<td width=250 colspan=1 valign=top>
+ <p>Ls, mGet шаблон,  pwd</p>
+ </td>
+
+<td width=250 colspan=1 valign=top>
+ <p> </p>
+ </td>
+
+</tr>
+<tr>
+ <td width=100 rowspan=1 valign=top>
+<p>7</p>
+ </td>
+ 
+<td width=250 colspan=1 valign=top>
+ <p>Dir, mRen шаблон1 шаблон2,  pwd</p>
+ </td>
+
+<td width=250 colspan=1 valign=top>
+ <p>Переименовать файлы по шаблону</p>
+ </td>
+
+</tr>
+
+<tr>
+ <td width=100 rowspan=1 valign=top>
+<p>8</p>
+ </td>
+ 
+<td width=250 colspan=1 valign=top>
+ <p>Ping IP-адрес</p>
+ </td>
+
+<td width=250 colspan=1 valign=top>
+ <p> </p>
+ </td>
+
+</tr>
+<tr>
+ <td width=100 rowspan=1 valign=top>
+<p>9</p>
+ </td>
+ 
+<td width=250 colspan=1 valign=top>
+ <p>Ls, Type имя_файла,  pwd</p>
+ </td>
+
+<td width=250 colspan=1 valign=top>
+ <p> </p>
+ </td>
+
+</tr>
+</table></div></div>
+
+<br>
+<br>
+<br>
+
+ 
+
+
+<br>		
+
+ </div>
+ </div>
+
+ </div>
+ </div>
+ </div>
+
+ <!--Меню навигации-->
+ <div aria-label="..." class = "nav-menu">
+ <ul class="pager background-transition-slow">
+ <li title="Наверх" style = "margin-right:15px; "><a class = "glyphicon glyphicon-menu-up page-scroll" href="#page-top"></a></li>
+ </ul>
+ </div>
+
+ </div>
+ <!-- jQuery -->
+ <script src="../lib/js/jquery.js"></script>
+
+ <!-- Bootstrap Core JavaScript -->
+ <script src="../lib/js/bootstrap.min.js"></script>
+
+ <!-- Scrolling Nav JavaScript -->
+ <script src="../lib/js/jquery.easing.min.js"></script>
+ <script src="../lib/js/scrolling-nav.js"></script>
+
+</body>
+
+</html>

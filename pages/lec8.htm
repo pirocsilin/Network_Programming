@@ -1,0 +1,1002 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="do.sibsutis.ru">
+
+  <title>ТЕМА 8. Конспект лекций</title>
+	
+	<link rel="icon" type="image/png" href="../lib/css/favicon.png">
+  <!-- Bootstrap Core CSS -->
+  <link href="../lib/css/bootstrap.css" rel="stylesheet">
+	
+  <!-- Custom CSS -->
+  <link href="../lib/css/scrolling-nav.css" rel="stylesheet">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+<!-- The #page-top ID is part of the scrolling feature - the data-spy and data-target are part of the built-in Bootstrap scrollspy function -->
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+  <!-- Navigation -->
+<nav class="navbar navbar-default navbar-fixed-top">
+ <div class="container">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+   <li class="hidden"> <a class="page-scroll" href="#page-top"></a> </li>
+	 
+	 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+   </button>
+	 
+   <a class="navbar-brand " href="../index.htm"> 
+  <text class = "hidden-xs">Сетевое программирование</text> 
+  <text class = "visible-xs">СП</text>
+	 </a>
+  </div>
+
+  <!-- Collect the nav links, forms, and glyphicon glyphicon-list-alt content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+   
+	 <!-- <ul class="nav navbar-nav">
+		<li><a href="#"></a></li> 
+   </ul> -->
+	
+   <ul class="nav navbar-nav navbar-right">
+    <li class="dropdown">
+		<button type="button" class="navbar-toggle dropdown-toggle hidden-xs" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>	   
+		<a class = "dropdown-toggle visible-xs" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Материалы</a>
+     <ul class="dropdown-menu">
+<li><a href="../index.htm">Аннотация курса</a></li>
+
+      <li role="separator" class="divider"></li>
+    
+  <li><a href="lec_index.htm">Теория</a></li>
+   
+   <li><a href="c_work.htm">Курсовая работа</a></li>
+ 
+<li><a href="labs.htm">Лабораторные работы</a></li> 
+    <li role="separator" class="divider"></li>
+  
+    
+    <li><a href="lit.htm">Литература</a></li>
+ 
+      <!--li><a href="q.htm">Вопросы для самопроверки</a></li-->			
+     </ul>
+ </li>
+ </ul>
+  </div><!-- /.navbar-collapse -->
+ </div><!-- /.container-fluid -->
+</nav>
+
+
+  <div id="intro" class="section content-section ">
+    <div class="container">
+       <div class="row">
+        <div class="col-lg-12">	
+
+
+<!-- содержание -->	
+<div class="page-header">				
+<h3><a href="#">ТЕМА 8. ПРОГРАММИРОВАНИЕ  В СЕТЯХ TCP/IP</a></h3>
+<a href="#1" class=punkt>8.1. Программирование  протокола TCP/IP</a><br>
+<a href="#2" class=punkt>8.2. Описание Winsock API</a><br>
+<a href="#3" class=punkt>8.3. Создание и использование сокета на клиентской стороне</a><br>
+<a href="#4" class=punkt>8.4. Создание и использование сокета на стороне сервера</a><br>
+<a href="#5" class=punkt>8.5. Программирование передачи данных</a><br>
+</div>
+<!--начало-->
+<a name=1 class="anchor"></a>
+<h3>8.1. Программирование  протокола TCP/IP</h3>
+<p><b>8.1.1 Создание и инициализация сокета</b></p>
+<p>Межпроцессорные взаимодействия в сетях TCP/IP реализуются по системе “клиент-сервер”. Как правило, клиент отправляет сообщение серверу, который после получения сообщения определяет по служебной информации адрес клиента. Сервер может отправить сообщение к клиенту по определенному адресу[3]. </p>
+<p>Процессы в сетях TCP/IP адресуются с помощью коммуникационных доменов – сокетов. Согласно схеме адресации TCP/IP, коммуникационный узел однозначно идентифицируется двумя значениями: адресом хоста (IP-адрес) и адресом процесса (адрес порта). Эта адресация отражается в структуре сокета sockaddr:</p>
+<div class="row"><div class="col-lg-9">
+<pre class="code">
+<font size=3.5>
+Struct sockaddr_in {
+      short	 	   sin_family; //  домен AF_INET
+      u_short     	   sin_port;      // номер порта
+      struct  in_addr  sin_addr;     //  IP-адрес
+      char		   sin_zero[8];
+};
+
+</font>
+</pre>
+</div></div>
+<p>Концепция сокетов в Windows пришла прямиком из систем UNIX и сохраняет с сокетами Беркли весьма близкое родство. При определенных усилиях реализация сокетов с помощью WinSock API переносима на другие не Windows платформы.</p>
+<p>WinSock версии 1.1 появился в январе 1993 года. Winsock версии 1.1 концентрировался вокруг TCP/IP, однако, как оказалось, программные практики для этого стека не подходили для всех возможных протоколов. </p>
+<p>Сокет создается с помощью функции socket, имеющей следующий прототип:</p>
+<p>SOCKET<br>
+<i>socket(int af, int type, int protocol);</i>
+</p>
+<p>Параметр af определяет формат адреса. Для этого параметра следует указывать значение AF_INET, что соответствует формату адреса, принятому в InterNet. </p>
+<p>Что же касается параметра protocol, то для него следует указать нулевое значение. В случае успеха функция socket возвращает дескриптор (тип SOCKET), который следует использовать для выполнения всех операций над данным сокетом.</p>
+<p>В настоящее время поддерживаются значения AF_INET или AF_INET6, которые являются форматами семейства интернет-адресов для IPv4 и IPv6. Другие параметры для семейства адресов (например, AF_NETBIOS для использования с NetBIOS) поддерживаются, если установлен поставщик услуг Windows Sockets для семейства адресов. Значения констант семейства адресов AF_ и семейства протоколов PF_ идентичны (например, AF_INET и PF_INET ), поэтому можно использовать любую константу.</p>
+<p>В таблице ниже перечислены общие значения для семейства адресов, хотя возможны и многие другие значения.</p>
+<br>
+<p>Таблица 6.1. Семейство адресов</p>
+<div class="row">
+<div class="col-lg-7">
+<table class="table table-hover table-condensed table-striped">
+ 
+<tr>
+ <td width=100 rowspan=1 valign=top>
+<p><b>Семейство адресов</b></p>
+ </td>
+ 
+<td width=400 colspan=1 valign=top>
+ <p><b>Описание</b></p>
+ </td>
+</tr>
+ 
+<tr>
+ <td width=100 rowspan=1 valign=top>
+<p>AF_INET</p>
+ </td>
+ 
+<td width=400 colspan=1 valign=top>
+ <p>Семейство адресов Интернет-протокола версии 4 (IPv4).</p>
+ </td>
+
+ </tr>
+ 
+<tr>
+ <td width=100 rowspan=1 valign=top>
+<p>AF_IPX</p>
+ </td>
+ 
+<td width=400 colspan=1 valign=top>
+ <p>Семейство адресов IPX / SPX. Это семейство адресов поддерживается только в том случае, если установлен совместимый транспортный протокол NWLink IPX / SPX NetBIOS.</p>
+ </td>
+
+ </tr>
+ 
+<tr>
+ <td width=100 rowspan=1 valign=top>
+<p>AF_APPLETALK</p>
+ </td>
+ 
+<td width=400 colspan=1 valign=top>
+ <p>Адресная семья AppleTalk. Это семейство адресов поддерживается только в том случае, если установлен протокол AppleTalk.</p>
+ </td>
+
+</tr>
+ 
+<tr>
+ <td width=100 rowspan=1 valign=top>
+<p>AF_NETBIOS</p>
+ </td>
+ 
+<td width=400 colspan=1 valign=top>
+ <p>Семейство адресов NetBIOS. Это семейство адресов поддерживается только в том случае, если установлен поставщик Windows Sockets для NetBIOS.</p>
+ </td>
+
+</tr>
+ 
+<tr>
+ <td width=100 rowspan=1 valign=top>
+<p>AF_INET6</p>
+ </td>
+ 
+<td width=400 colspan=1 valign=top>
+ <p>Семейство адресов Интернет-протокола версии 6 (IPv6).</p>
+ </td>
+
+ </tr>
+ 
+<tr>
+ <td width=100 rowspan=1 valign=top>
+<p>AF_IRDA</p>
+ </td>
+ 
+<td width=400 colspan=1 valign=top>
+ <p>Семейство адресов Инфракрасная ассоциация данных (IrDA).</p>
+ </td>
+
+</tr>
+ 
+<tr>
+ <td width=100 rowspan=1 valign=top>
+<p>AF_BTH</p>
+ </td>
+ 
+<td width=400 colspan=1 valign=top>
+ <p>Семейство адресов Bluetooth.</p>
+ </td>
+
+</tr>
+ 
+</table></div></div>
+
+<br>
+<p>В Windows Sockets 1.1 единственными возможными типами сокетов являются SOCK_DGRAM и SOCK_STREAM. Для преодоления этой проблемы был разработан Windows Sockets 2, который добавил ряд функций для поддержки нескольких протоколов. В следующей таблице 6.2 перечислены возможные значения параметра типа,поддерживаемые для Windows Sockets 2:</p>
+<p>Таблица 6.2. Типы сокетов</p>
+<div class="row">
+<div class="col-lg-7">
+<table class="table table-hover table-condensed table-striped">
+ 
+<tr>
+ <td width=100 rowspan=1 valign=top>
+<p><b>Типы сокетов</b></p>
+ </td>
+ 
+<td width=400 colspan=1 valign=top>
+ <p><b>Описание</b></p>
+ </td>
+</tr>
+ 
+<tr>
+ <td width=100 rowspan=1 valign=top>
+<p>SOCK_STREAM</p>
+ </td>
+ 
+<td width=400 colspan=1 valign=top>
+ <p>Тип сокета, который обеспечивает последовательные, надежные, двусторонние байтовые потоки, использует протокол TCP для семейства интернет-адресов (AF_INET или AF_INET6).</p>
+ </td>
+
+ </tr>
+ 
+<tr>
+ <td width=100 rowspan=1 valign=top>
+<p>SOCK_DGRAM</p>
+ </td>
+ 
+<td width=400 colspan=1 valign=top>
+ <p>Тип сокета, который поддерживает дейтаграммы,. Этот тип сокета использует протокол UDP для семейства интернет-адресов (AF_INET или AF_INET6).</p>
+ </td>
+
+ </tr>
+ 
+<tr>
+ <td width=100 rowspan=1 valign=top>
+<p>SOCK_RAW</p>
+ </td>
+ 
+<td width=400 colspan=1 valign=top>
+ <p>Тип сокета, который предоставляет необработанный сокет, который позволяет приложению манипулировать следующим заголовком протокола верхнего уровня. </p>
+ </td>
+
+</tr>
+ 
+<tr>
+ <td width=100 rowspan=1 valign=top>
+<p>SOCK_RDM</p>
+ </td>
+ 
+<td width=400 colspan=1 valign=top>
+ <p>Тип сокета, который обеспечивает надежную датаграмму сообщения</p>
+ </td>
+
+</tr>
+ 
+<tr>
+ <td width=100 rowspan=1 valign=top>
+<p>SOCK_SEQPACKET</p>
+ </td>
+ 
+<td width=400 colspan=1 valign=top>
+ <p>Тип сокета, который предоставляет пакет псевдопотока на основе дейтаграмм.</p>
+ </td>
+
+ </tr>
+ 
+</table></div></div>
+
+<br>
+<p>Ниже приведен фрагмент кода, в котором создается сокет для передачи
+данных с использование протокола TCP
+</p>
+<div class="row"><div class="col-lg-9">
+<pre class="code">
+<font size=3.5>
+srv_socket = socket(AF_INET, SOCK_STREAM, 0);
+if (srv_socket == INVALID_SOCKET)
+{
+MessageBox(NULL, "Ошибка создания сокета", "Error", MB_OK);
+return;
+}
+
+</font>
+</pre>
+</div></div>
+<p><b>Удаление сокета</b></p>
+<p>Для освобождения ресурсов приложение должно закрывать сокеты, которые ему больше не нужны, вызывая функцию closesocket:</p>
+<p class=punkt>int<br>
+closesocket(SOCKET sock);</p>
+
+<p><b>Параметры сокета</b></p>
+<p>Перед использованием сокета необходимо задать его параметры, для чего следует подготовить структуру типа sockaddr, определение которой помещено ниже</p>
+<div class="row"><div class="col-lg-9">
+<pre class="code">
+<font size=3.5>
+struct sockaddr
+{
+u_short sa_family;
+char sa_data[14];
+} ;
+typedef struct sockaddr SOCKADDR;
+typedef struct sockaddr *PSOCKADDR;
+typedef struct sockaddr FAR *LPSOCKADDR;
+Для работы с адресами в формате InterNet используется другой вариант
+этой структуры, в котором детализируется формат поля sa_data
+struct sockaddr_in
+{
+short sin_family;
+u_short sin_port;
+struct in_addr sin_addr;
+char sin_zero[8];
+} ;
+typedef struct sockaddr_in SOCKADDR_IN;
+typedef struct sockaddr_in *PSOCKADDR_IN;
+typedef struct sockaddr_in FAR *LPSOCKADDR_IN;
+</font>
+</pre>
+</div></div>
+<p>Поле sin_family определяет тип адреса. Следует записать в это поле значение AF_INET, которое соответствует типу адреса, принятому в InterNet (структура srv_address имеет тип SOCKADDR_IN) srv_address.sin_family = AF_INET;</p>
+<p>Поле sin_port определяет номер порта, который будет использоваться для передачи данных.</p>
+<p>Перед передачей данных клиент должен установить соединение с сервером. Эта схема приведена на рис.3 </p>
+<p>В соответствии с этой схемой сервер производит связывание с портом с помощью функции bind() и сообщает о возможности приема запросов с помощью функции listen(). При получении запроса он с помощью функции accept() создает новый сокет, который и обслуживает обмен данными между клиентом и сервером. Для обработки поступающих запросов сервер порождает отдельный процесс на каждый поступивший запрос. Дочерний процесс принимает сообщения от клиента с помощью функции recv() и передает их с помощью функции send().</p>
+<p>Клиент после создания сокета посылает запрос на соединение с помощью функции connect(), указывая адрес сервера (IP-адрес и номер порта). После установление соединения (“тройное рукопожатие”) клиент передает сообщение с помощью функции send() и принимает с помощью функции recv().</p>
+<p><img src="img/image050.gif"></p>
+<p>Рис.8.1. Схема установления связи и передачи данных</p>
+<br>
+<p>Утилита bind необходима для привязки адреса к сокету. То есть после подготовки структуры SOCKADDR (записи в нее параметров сокета - в частности, адреса) следует привязку адреса к сокету при помощи функции bind:</p>
+<p class=punkt>int bind(SOCKET sock, const struct sockaddr FAR *addr, int namelen);</p>
+<p>Параметр sock содержит дескриптор созданного ранее функцией socket сокета, в поле addr следует записать указатель на подготовленную структуру SOCKADDR, в поле namelen - размер этой структуры. В случае ошибки функция bind возвращает значение SOCKET_ERROR</p>
+<p>Пример вызова функции bind показан ниже:</p>
+<div class="row"><div class="col-lg-9">
+<pre class="code">
+<font size=3.5>
+if (bind(srv_socket, (LPSOCKADDR) &srv_address,
+sizeof(srv_address)) == SOCKET_ERROR)
+{
+closesocket(srv_socket);
+MessageBox(NULL, "Ошибка функции Bind", "Error", MB_OK);
+return;
+}
+</font>
+</pre>
+</div></div>
+<p>При создании канала связи со стороны сервера прежде всего следует переключить сокет в режим приема для выполнения ожидания соединения с клиентом при помощи функции listen</p>
+<p class=punkt>int listen(SOCKET sock, int backlog);</p>
+
+<p>Ниже приведен пример вызова функции listen</p>
+<div class="row"><div class="col-lg-9">
+<pre class="code">
+<font size=3.5>
+if (listen(srv_socket, 1) == SOCKET_ERROR)
+{
+closesocket(srv_socket);
+MessageBox(NULL, "Ошибка функции Listen", "Error", MB_OK);
+return;
+}
+</font>
+</pre>
+</div></div>
+<p>Далее программа должна ожидать соединения. Осуществляется циклический вызов функции accept до тех пор, пока не будет установлено соединение. Затем можно приступить к обмену данными.</p>
+<p>Функция <b>accept</b> имеет следующий прототип</p>
+<p class=punkt>SOCKET<br>
+accept(SOCKET sock, struct sockaddr FAR *addr, int FAR *addrlen);</p>
+<p>С целью получения адреса IP используется функция gethostbyname.</p>
+<br>
+<p><b>Передача и прием данных</b></p>
+<p>После создания канала связи можно начинать передачу данных. Для передачи данных посредством протокола гарантированной доставки TCP можно воспользоваться функциями send и recv, входящими в программный интерфейс Windows Sockets.</p>
+<p>Функция передачи данных send имеет 4 параметра - дескриптор сокета sock, на котором выполняется передача, адрес буфера buf, содержащего передаваемое сообщение, размер этого буфера bufsize и флаги flags</p>
+<p class=punkt>int send(SOCKET sock, const char FAR *buf, int bufsize, int flags);</p>
+<p>Параметры предназначенной для приема данных функции recv аналогичны параметрам функции send</p>
+<p class=punkt>int<br>
+recv(SOCKET sock, char FAR *buf, int bufsize, int flags);</p>
+<p>Функции send и recv возвращают количество соответственно принятых и переданных байтов данных. Принимающее данные приложение должно вызывать функцию recv в цикле до тех пор, пока не будут приняты все переданные данные, при этом на один вызов функции send может приходиться несколько вызовов функции recv.</p>
+<br>
+<a name=2 class="anchor"></a>
+<h3>8.2. Описание Winsock API</h3>
+<p>Winsock API следует модели открытой системной архитектуры Windows (WOSA), которая определяет стандартный интерфейс для поставщиков служб (SPI), лежащий между программным интерфейсом API и стеком протоколов. Такое разделение решает две главных задачи:</p>
+<p class=punkt>1.	Добавление уровня косвенности между стеком протоколов и программным интерфейсом. Фактически это означает, что программисты могут использовать различные сетевые протоколы через один и тот же набор функций API и через одни и те же техники программирования;</p>
+<p class=punkt>2.	Позволяет сторонним производителям программного обеспечения регистрировать собственных поставщиков служб, делая их доступными любому потребителю API.</p>
+<p>Winsock поддерживает множество сетевых протоколов, важнейшим из которых, несомненно, является TCP/IP. При этом Winsock поддерживает как IPv4, так и IPv6 версии протокола IP, которые разделены на адресные семейства AF_INET и AF_INET6 соответственно. </p>
+<p><i>8.2.1.Реализация базового сетевого приложения посредством Winsock API.</i> </p>
+<p>Инициализация</p>
+<p>Минимальный код, необходимый для работы с Winsock API представлен ниже:</p>
+<div class="row"><div class="col-lg-9">
+<pre class="code">
+<font size=3.5>
+ #include <winsock2.h>
+#include <ws2tcpip.h>
+#include <stdio.h>
+#pragma comment(lib, "Ws2_32.lib")
+int main(int argc, char* argv[]) {
+	WSADATA wsaData;
+	int iResult;
+	// Initialize Winsock
+	iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
+	if (iResult != 0) {
+		printf("WSAStartup failed: %d\n", iResult);
+		return 1;
+	}
+	return 0;
+}
+</font>
+</pre>
+</div></div>
+<p>Приложения, которые используют Winsock, должны подключать библиотечный файл ws2_32.lib. Следующая строка сообщает линковщику о необходимости подключения этого файла: </p>
+<p><b><i>#pragma comment(lib, "Ws2_32.lib"). </i></b></p>
+<p>Winsock2.h файл содержит большинство функций, структур и определений для работы с сокетами windows. Ws2tcpip.h файл, специфичный для стека протоколов TCP/IP и содержит новые функции и структуры, используемые для получения IP адресов. Stdio.h содержит функции для стандартного ввода-вывода. [7]</p>
+<p>Приложение должно произвести инициализацию Windows Socket DLL перед вызовом любой Winsock функции. Инициализация производится с помощью вызова функции WSAStartup. </p>
+<p>Структура WSADATA при возврате из этой функции будет содержать информацию о реализации Windows Socket. Макрос MAKEWORD(2,2), переданный функции WSAStartup в качестве параметра, запрашивает версию Winsock 2.2 у системы и одновременно устанавливает наивысшую версию этой библиотеки, которую может использовать вызывающий код. [8]</p>
+<p>Этот базовый набор общий как для клиентского, так и для серверного приложений.</p>
+<br>
+<a name=3 class="anchor"></a>
+<h3>8.3. Создание и использование сокета на клиентской стороне</h3>
+<p>Создание сокета начинается с объявления и инициализации специальной структуры типа <i>sockaddr</i>. В действительности, многие функции требуют структуру типа <i>addrinfo</i>, в которой есть поле-указатель на структуру типа <i>sockaddr</i>:</p>
+<div class="row"><div class="col-lg-9">
+<pre class="code">
+<font size=3.5>
+typedef struct addrinfo {
+  int ai_flags;
+  int ai_family;
+  int ai_socktype;
+  int ai_protocol;
+  size_t ai_addrlen;
+  char *ai_canonname;
+  struct sockaddr *ai_addr;
+  struct addrinfo *ai_next;
+} ADDRINFOA, *PADDRINFOA;
+</font>
+</pre>
+</div></div>
+<p>Здесь и далее, говоря о структуре sockaddr, неявно подразумевается поле в структуре <i>addrinfo.ai_addr</i>. Назначение необходимых нам полей этой структуры раскрывается ниже в тексте. С полным описанием этой структуры можно ознакомиться в [5]. Такой уровень косвенности связан с тем, что вообще говоря существует несколько определений структуры sockaddr для различных протоколов [6]. Использование структуры<i> addrinfo</i> избавляет от необходимости помнить какая именно разновидность структуры sockaddr используется, кроме этого многие новые функции Winsock API требуют в качестве параметра структуру <i>addrinfo</i>. В общем случае структура <i>sockaddr</i> определяет конечную точку: IP-адрес и номер порта сервера.</p>
+<p>Для данного приложения мы указываем, что адресное семейство не определено. Это означает, что сервер может вернуть либо IPv4 либо IPv6 адрес. Кроме того, мы указываем что тип сокета должен быть потоковый, а протоколом транспортного уровня является TCP протокол:</p>
+<div class="row"><div class="col-lg-9">
+<pre class="code">
+<font size=3.5>
+struct addrinfo *result = NULL,
+		*ptr = NULL,
+		hints;
+	ZeroMemory(&hints, sizeof(hints));
+	hints.ai_family = AF_UNSPEC;
+	hints.ai_socktype = SOCK_STREAM;
+	hints.ai_protocol = IPPROTO_TCP;
+</font>
+</pre>
+</div></div>
+<p>Мы будем устанавливать соединение с сервером, имя которого будет передаваться в качестве параметра в командной строке при запуске приложения. Таким образом, нам необходимо разрешить адрес сервера по указанному пользователем имени. Для этого мы вызываем функцию getaddrinfo, которая запрашивает IP-адрес по переданному имени, кроме того мы явно указываем порт, на котором будет происходит соединение на серверной стороне, в данном случае, порт установлен в значение «27015».</p>
+<div class="row"><div class="col-lg-9">
+<pre class="code">
+<font size=3.5>
+#define DEFAULT_PORT "27015"
+	// Resolve the server address and port
+	iResult = getaddrinfo(argv[1], DEFAULT_PORT, &hints, &result);
+	if (iResult != 0) {
+		printf("getaddrinfo failed: %d\n", iResult);
+		WSACleanup();
+		return 1;
+	}
+</font>
+</pre>
+</div></div>
+<p>Теперь можно создать сокет соединения посредством получения экземпляра типа SOCKET. Мы делаем это посредством вызова функции <b>socket</b>, передавая ей первый возвращенный функцией <i>getaddrinfo</i> IP-адрес, тип сокета и протокол транспортного уровня:</p>
+<div class="row"><div class="col-lg-9">
+<pre class="code">
+<font size=3.5>
+	// Create connection socket
+	SOCKET ConnectSocket = INVALID_SOCKET;
+	// Attempt to connect to the first address returned by
+	// the call to getaddrinfo
+	ptr = result;
+	// Create a SOCKET for connecting to server
+	ConnectSocket = socket(ptr->ai_family, ptr->ai_socktype,
+		ptr->ai_protocol);
+	if (ConnectSocket == INVALID_SOCKET) {
+		printf("Error at socket(): %ld\n", WSAGetLastError());
+		freeaddrinfo(result);
+		WSACleanup();
+		return 1;
+	}
+</font>
+</pre>
+</div></div>
+<p>Если функция socket терпит неудачу, то она возвращает значение INVALID_SOCKET, которое проверяется в условном выражении. Функция WSAGetLastError, возвращает номер последней возникшей ошибки, а функция <i>WSACleanup</i> освобождает ресурсы, связанные инициализацией библиотеки WS2_32 DLL. [6]</p>
+<p>Созданный сокет можно использовать для соединения с серверной стороной. Это делается посредством вызова функции <i>connect</i>, которой в качестве параметра передаются экземпляр сокета и структура <i>sockaddr</i>:</p>
+<div class="row"><div class="col-lg-9">
+<pre class="code">
+<font size=3.5>
+// Connect to server.
+	iResult = connect(ConnectSocket, ptr->ai_addr, (int)ptr->ai_addrlen);
+	if (iResult == SOCKET_ERROR) {
+		closesocket(ConnectSocket);
+		ConnectSocket = INVALID_SOCKET;
+	}
+	freeaddrinfo(result);
+	if (ConnectSocket == INVALID_SOCKET) {
+		printf("Unable to connect to server!\n");
+		WSACleanup();
+		return 1;
+	}
+</font>
+</pre>
+</div></div>
+<p>В данном случае мы пытаемся соединиться лишь по одному адресу, инкапсулированному в структуре <i>sockaddr</i>. На самом деле функция <i>getaddrinfo</i> возвращает связный список структур типа <i>addrinfo</i>, который можно обойти, используя поле <i>addrinfo.ai_next</i>, в случае если функция <i>connect</i> потерпела неудачу при первом вызове. Однако для упрощения кода здесь этого не делается. [7]</p>
+<p>В случае успешного соединения клиент и сервер могут обмениваться информацией посредством вызова функций <i>send</i> и <i>recv</i>:</p>
+<div class="row"><div class="col-lg-9">
+<pre class="code">
+<font size=3.5>
+#define DEFAULT_BUFLEN 512
+	int recvbuflen = DEFAULT_BUFLEN;
+	char *sendbuf = "this is a test";
+	char recvbuf[DEFAULT_BUFLEN];
+	// Send an initial buffer
+	iResult = send(ConnectSocket, sendbuf, (int)strlen(sendbuf), 0);
+	if (iResult == SOCKET_ERROR) {
+		printf("send failed: %d\n", WSAGetLastError());
+		closesocket(ConnectSocket);
+		WSACleanup();
+		return 1;
+	}
+	printf("Bytes Sent: %ld\n", iResult);
+	// shutdown the connection for sending since no more data will be sent
+	// the client can still use the ConnectSocket for receiving data
+	iResult = shutdown(ConnectSocket, SD_SEND);
+	if (iResult == SOCKET_ERROR) {
+		printf("shutdown failed: %d\n", WSAGetLastError());
+		closesocket(ConnectSocket);
+		WSACleanup();
+		return 1;
+	}
+	// Receive data until the server closes the connection
+	do {
+		iResult = recv(ConnectSocket, recvbuf, recvbuflen, 0);
+		if (iResult > 0)
+			printf("Bytes received: %d\n", iResult);
+		else if (iResult == 0)
+			printf("Connection closed\n");
+		else
+			printf("recv failed: %d\n", WSAGetLastError());
+	} while (iResult > 0);
+</font>
+</pre>
+</div></div>
+<p>Обе функции возвращают целое число байт, переданных или отправленных, или номер ошибки. Каждая функция кроме того, принимает общие параметры: активный сокет, буфер char, число байт для приема и отправки, а также специальные флаги, которые здесь не используются. [8] Обратите внимание на использование функции <i>shutdown</i>, которая не разрывает соединение, а закрывает передачу или отправку данных. В коде выше клиент, после передачи сообщения серверу, закрывает отправку данных посредством указания флага <i>SD_SEND</i>.</p>
+<p>После того как клиент перестанет получать данные от сервера, он должен закрыть сокет, а перед завершением использования <i>Windows Sockets DLL</i> освободить ресурсы вызовом функции <i>WSACleanup</i>:</p>
+<p class=punkt><i>// cleanup<br>
+closesocket(ConnectSocket);<br>
+WSACleanup();</i> [9]
+</p>
+<p>Полный исходный код клиентской части приложения приведен в файле <i>WinSockClient.cpp</i>. Исполняемый файл: <i>WinSockClient.exe.</i></p>
+<br>
+<a name=4 class="anchor"></a>
+<h3>8.4. Создание и использование сокета на стороне сервера</h3>
+<p>Как и в случае клиентской части мы начинаем с определения структуры <i>addrinfo</i> и вызова функции <i>getaddrinfo</i>:</p>
+<div class="row"><div class="col-lg-9">
+<pre class="code">
+<font size=3.5>
+#define DEFAULT_PORT "27015"
+	struct addrinfo *result = NULL, *ptr = NULL, hints;
+	ZeroMemory(&hints, sizeof(hints));
+	hints.ai_family = AF_INET;
+	hints.ai_socktype = SOCK_STREAM;
+	hints.ai_protocol = IPPROTO_TCP;
+	hints.ai_flags = AI_PASSIVE;
+	// Resolve the local address and port to be used by the server
+	iResult = getaddrinfo(NULL, DEFAULT_PORT, &hints, &result);
+	if (iResult != 0) {
+		printf("getaddrinfo failed: %d\n", iResult);
+		WSACleanup();
+		return 1;
+	}
+</font>
+</pre>
+</div></div>
+<p>Структура addrinfo инициализирована следующими значениями:
+<p class=punkt>AF_INET указывает, что используется IPv4 адресное семейство;</p>
+<p class=punkt>SOCK_STREAM указывает, что используется потоковый сокет;</p>
+<p class=punkt>IPPROTO_TCP указывает, что используется TCP протокол;</p>
+<p class=punkt>AI_PASSIVE флаг указывает, что вызывающий код намеревается использовать возвращаемую из функции getaddrinfo структуру для вызова функции bind. Когда установлен этот флаг, а параметр имени узла в getaddrinfo функции – это NULL-указатель, поле IP адреса в структуре адреса сокета устанавливается в значение INADDR_ANY для IPv4 адресов или IN6ADDR_ANY_INIT для IPv6 адресов;</p>
+<p class=punkt>«27015» – это номер порта, ассоциированный с сервером и который будет использовать клиентом при подключении к созданному серверу.
+</p>
+<p>Теперь мы можем создать сокет, посредством получения экземпляра типа SOCKET. Но в отличие от клиента это будет слушающий сокет:</p>
+<div class="row"><div class="col-lg-9">
+<pre class="code">
+<font size=3.5>
+	// Create a SOCKET for the server to listen for client connections
+	SOCKET ListenSocket = INVALID_SOCKET;
+	ListenSocket = socket(result->ai_family, result->ai_socktype, result->ai_protocol);
+	if (ListenSocket == INVALID_SOCKET) {
+		printf("Error at socket(): %ld\n", WSAGetLastError());
+		freeaddrinfo(result);
+		WSACleanup();
+		return 1;
+	}
+</font>
+</pre>
+</div></div>
+<p>Как указывалось выше, для данного сокета было определено IPv4 адресное семейство. В отличие от клиентской части, если сервер хочет обслуживать оба адресных семейства, он должен создать для каждого из них отдельный слушающий сокет. В семействе Windows Vista и позже есть возможность создания IPv6 сокета и помещение его в стек со сдвоенным режимом, что позволяет прослушивать адреса обоих семейств. [9]</p>
+<p>Для того, чтобы сервер мог принимать клиентские подключения, он должен быть связан с сетевым адресом. Код ниже демонстрирует как связать созданный слушающий сокет с IP-адресом и портом. Клиенты используют эти IP-адрес и порт для соединения через сеть. Связывание производится посредством вызова функции bind:</p>
+<div class="row"><div class="col-lg-9">
+<pre class="code">
+<font size=3.5>
+// Setup the TCP listening socket
+	iResult = bind(ListenSocket, result->ai_addr, (int)result->ai_addrlen);
+	if (iResult == SOCKET_ERROR) {
+		printf("bind failed with error: %d\n", WSAGetLastError());
+		freeaddrinfo(result);
+		closesocket(ListenSocket);
+		WSACleanup();
+		return 1;
+	}
+	// Free address info
+	freeaddrinfo(result);
+</font>
+</pre>
+</div></div>
+<p>После возврата из функции bind адресная информация, возвращаемая функцией <i>getaddrinfo</i> больше не нужна, освободить память, занятую вызовом этой функции можно посредством вызова функции <i>freeaddrinfo</i>. [10]</p>
+<p>После связывания сокета, сервер должен прослушивать на заданных IP-адресе и порте входящие запросы на соединение от клиентов. Делается это посредством вызова функции listen, как продемонстрировано в коде ниже:</p>
+<div class="row"><div class="col-lg-9">
+<pre class="code">
+<font size=3.5>
+if (listen(ListenSocket, SOMAXCONN) == SOCKET_ERROR) {
+		printf("Listen failed with error: %ld\n", WSAGetLastError());
+		closesocket(ListenSocket);
+		WSACleanup();
+		return 1;
+	}
+</font>
+</pre>
+</div></div>
+<p>Функции listen передаются два параметра: слушающий сокет и параметр очереди (backlog). В данном случае передается специальная константа SOMAXCONN, которая инструктирует поставщика сокета разрешить максимальный размер очереди ожидающих подключения клиентов. [11]</p>
+<p>После того, как сервер начинает прослушивать соединения, он должен каким-то образом обработать запрос на соединение от клиента. Для принятия подключения, сервер должен создать временный объект типа <b>SOCKET</b> для создания так называемого клиентского сокета. Обычно, серверные приложения проектируются таким образом, чтобы принимать множественные запросы на подключение. В высоконагруженных серверах для принятия множественных запросов используются несколько потоков. Есть несколько различных программных техник для обработки множественных подключений. Одна из них заключается в создании цикла, который проверяет запросы на подключение посредством вызова функции listen и как только запрос поступает, поток вызывает функции accept, AcceptEx или WSAAccept и передает работу по обработке запроса другому потоку.</p>
+<p>В нашем примере сервер использует один поток. Он прослушивает и принимает одиночное соединение [12]:</p>
+<div class="row"><div class="col-lg-9">
+<pre class="code">
+<font size=3.5>
+// Accept connection
+	SOCKET ClientSocket;
+	ClientSocket = INVALID_SOCKET;
+	// Accept a client socket
+	ClientSocket = accept(ListenSocket, NULL, NULL);
+	if (ClientSocket == INVALID_SOCKET) {
+		printf("accept failed: %d\n", WSAGetLastError());
+		closesocket(ListenSocket);
+		WSACleanup();
+		return 1;
+	}
+</font>
+</pre>
+</div></div>
+<p>После принятия подключения, как и в случае клиента, сервер может принимать и передавать данные посредством вызовов функций recv и send [13]:</p>
+<div class="row"><div class="col-lg-9">
+<pre class="code">
+<font size=3.5>
+	// Receive and send data
+	#define DEFAULT_BUFLEN 512
+
+	char recvbuf[DEFAULT_BUFLEN];
+	int iSendResult;
+	int recvbuflen = DEFAULT_BUFLEN;
+
+	// Receive until the peer shuts down the connection
+	do {
+
+		iResult = recv(ClientSocket, recvbuf, recvbuflen, 0);
+		if (iResult > 0) {
+			printf("Bytes received: %d\n", iResult);
+
+			// Echo the buffer back to the sender
+			iSendResult = send(ClientSocket, recvbuf, iResult, 0);
+			if (iSendResult == SOCKET_ERROR) {
+				printf("send failed: %d\n", WSAGetLastError());
+				closesocket(ClientSocket);
+				WSACleanup();
+				return 1;
+			}
+			printf("Bytes sent: %d\n", iSendResult);
+		}
+		else if (iResult == 0)
+			printf("Connection closing...\n");
+		else {
+			printf("recv failed: %d\n", WSAGetLastError());
+			closesocket(ClientSocket);
+			WSACleanup();
+			return 1;
+		}
+
+	} while (iResult > 0);
+</font>
+</pre>
+</div></div>
+<p>В данном случае сервер в цикле принимает данные от клиента и отправляет эхо-ответ до тех пор, пока клиент не закроет подключение либо не возникнет ошибка при приеме или передачи данных.</p>
+<p>После завершения приема и передачи данных, сервер должен разорвать соединение и закрыть сокет.</p>
+<p>Когда сервер прекращает передачу данных клиенту, он вызывает функцию shutdown с передачей ей специального флага SD_SEND для закрытия передающей стороны сокета. Это позволяет клиенту освободить некоторую часть ресурсов, связанных данным подключением. При этом сервер может продолжать принимать данные от клиента:</p>
+<div class="row"><div class="col-lg-9">
+<pre class="code">
+<font size=3.5>
+		// shutdown the send half of the connection since no more data will be sent
+		iResult = shutdown(ClientSocket, SD_SEND);
+		if (iResult == SOCKET_ERROR) {
+			printf("shutdown failed: %d\n", WSAGetLastError());
+			closesocket(ClientSocket);
+			WSACleanup();
+			return 1;
+		}
+</font>
+</pre>
+</div></div>
+<p>Как только клиентская сторона прекращает прием данных, вызывается функция closesocket и производится освобождение ресурсов, связанных инициализацией библиотеки Windows Socket DLL [14]:</p>
+<div class="row"><div class="col-lg-9">
+<pre class="code">
+<font size=3.5>
+// cleanup
+	closesocket(ClientSocket);
+	WSACleanup();
+</font>
+</pre>
+</div></div>
+<br>
+<a name=5 class="anchor"></a>
+<h3>8.5. Программирование передачи данных</h3>
+<p>Приведем пример программы talk.cpp, реализующей диалог между ЭВМ. Машины сети адресуются с помощью IP-адреса. Для отладки можно использовать программу на одной машине, запустив программу в разных окнах. В этом случае можно использовать в качестве IP-адреса локальный адрес 127.0.0.1. </p>
+<div class="row"><div class="col-lg-9">
+<pre class="code">
+<font size=3.5>
+// ==================================
+// talk.cpp
+#include <stdio.h>
+#include <conio.h>
+#include <winsock.h>
+#include <process.h>
+#include <dos.h>
+#ifndef SD_SEND
+ #define SD_SEND 1
+#endif
+const short TalkPort = 83; // Порт сокета
+const short MaxConn = 1;   // Максимальное колличество соединений
+int signal = 2,  mutex = 0;
+int ts(int *s) { int y=*s; *s=1; return(y);}
+void pb(int *s) { l: if (ts(s)) goto l;}
+void vb(int *s) { *s=0;}
+// Инициализация Windows Sockets DLL
+int WinSockInit(){
+ WORD wVersionRequested;
+ WSADATA wsaData;
+ wVersionRequested = MAKEWORD(2, 0); /* Требуется WinSock ver 2.0*/
+ printf("Starting winsock..."); 
+// Проинициализируем Dll
+ if (WSAStartup(wVersionRequested, &wsaData) != 0){ 
+    printf("\nError : Couldn't find a usable winsock Dll\n");
+    return 1;
+   }
+// Проверка версии Dll
+ if (LOBYTE(wsaData.wVersion) != 2 || HIBYTE(wsaData.wVersion) != 0){
+    printf("\nError : Couldn't find a usable WinSock DLL\n");
+    WSACleanup(); // Отключение Windows Sockets DLL
+    return 1; 
+   }
+ printf(" Winsock started.\n");
+ return 0;
+}
+// Отключение Windows Sockets DLL
+void WinSockClose(){
+ WSACleanup();   printf("WinSock Closed...\n");
+}
+// Остановка передачи данных
+void stopTCP(SOCKET s){
+ shutdown(s, SD_SEND); // Остановка передачи данных
+ closesocket(s); //  Закрытие сокета
+ printf("Socket %ld closed.\n",s);
+}
+// Передача данных
+void doSend(void *p){
+ SOCKET *s = (SOCKET*) p;
+ char ch[1];
+ int x = 1, y = 1;
+
+ while(1)   {
+    ch[0] = getch();
+ // Отправим символ
+    send(*s, ch, 1, 0); 
+ // Если 'ESC' выйдем
+    if (ch[0] == 27) break;
+ // Войдем в критическую секцию
+    pb(&mutex); 
+ // Востановим координаты
+    gotoxy(x, y); 
+ // Если 'Enter' то перевод строки, иначе символ
+    if (ch[0] == 13) printf("\n\r"); else printf("%c",ch[0]);
+ // Если 'Del' убераем один символ
+    if (ch[0] == 8) { printf(" "); x--; gotoxy(x, y);}
+ // Запомним координаты
+    x = wherex(); y = wherey();
+ /* Если выходим за границу вывода, прокрутка изображения на строку вверх*/
+    if (y == 13)  { 
+       movetext(1, 2, 80, 12, 1, 1);
+       gotoxy(1,12);
+       clreol();
+       x = 1;y = 12;
+      }
+ // Выйдем из критической секции
+    vb(&mutex);
+   }
+// Укажем основной программе что процесс отработал
+ signal--;
+ return;
+}
+// Прием данных
+void doReciv(void *p){
+ SOCKET *s = (SOCKET*) p;
+ char ch[1];
+ int x = 1, y = 14;
+
+ while(1)   {
+ // Примем символ
+    recv(*s, &ch[0], 1, 0);
+ /* Если 'ESC' оповестим приемник абонента о выходе и выйдем сами*/
+    if (ch[0] == 27) { send(*s, ch, 1, 0);printf("\n\nTalk: Press 'ESC' to exit\n"); break;}
+    pb(&mutex);
+    gotoxy(x,y);
+    if (ch[0] == 13) printf("\n\r"); else printf("%c",ch[0]);
+    if (ch[0] == 8) { printf(" "); x--; gotoxy(x,y);}
+    x = wherex();y = wherey();
+    if (y == 25) { gotoxy(1, 14); delline(); gotoxy(1, 24);x = 1;y = 24;}
+    vb(&mutex);
+   }
+ signal--;
+ return;
+}
+//  ===  Главная программа  =========
+int main(int argc, char *argv[]){
+ SOCKET lsock, client, *bs;
+ struct sockaddr_in fromsock, sock;
+ struct hostent *hp;
+ int ErrCode;
+
+ printf("Programm Talk. NGASU - 2004г. \n\n");
+
+ if (argc == 1) { printf("Usage: TALK <host name>\nFor example: talk ist2\n    or         talk 62.76.96.140");return -1;}
+ if (WinSockInit()) { WinSockClose(); return -2;}
+/* Создадим сокет. Протокол - TCP. Метод передачи - поток.*/
+ if ((lsock = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP)) == INVALID_SOCKET)   {
+    printf("Talk: Error creating listening socket.. Error %d\n",WSAGetLastError());
+    WinSockClose();
+    return -3;
+   } 
+  else printf("Talk: Listening socket [%ld] created..\n",lsock);
+
+// Переведем имя компьютера в IP адрес
+ if ((hp = gethostbyname(argv[1])) == NULL)   {
+    printf("Talk: Unknown host name '%s'\n",argv[1]);
+    WinSockClose();
+    return -4;
+   }
+  else{
+      memset((char *) &sock, 0, sizeof(sock));     
+      memcpy((char *) &sock.sin_addr, hp->h_addr, 
+      hp->h_length);                                 // IP-адрес
+      sock.sin_family = hp->h_addrtype; // Тип адреса
+      sock.sin_port = htons(TalkPort);     // Порт сокета
+      printf("Talk: Connect to %d.%d.%d.%d\n",
+     (u_char)hp->h_addr[0],(u_char)hp->h_addr[1],
+     (u_char)hp->h_addr[2],(u_char)hp->h_addr[3]);
+     }
+ if ((bs = (SOCKET*) malloc(sizeof(SOCKET))) == NULL){
+    printf ("Talk: out of memory, connection will be closed..\n");
+    stopTCP(lsock);      WinSockClose();
+    return -5;
+   }
+// Попробуем соединиться с указанным компьютером
+ if (connect(lsock, (struct sockaddr*) &sock, sizeof(sock)))  {
+    // Если не получилось запускаем 'Сервер' 
+    printf("Talk: Server not found... ");
+    stopTCP(lsock);
+    printf("Talk: Server starting...\n");
+    /* Создадим сокет. Протокол - TCP. Метод передачи - поток.*/
+    if (( lsock = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP)) == INVALID_SOCKET) {
+       printf("Talk: Error creating listening socket.. Error %d\n",WSAGetLastError());
+       free(bs);       WinSockClose();
+       return -6;
+      } 
+     else printf("Talk: Listening socket [%ld] created..\n",lsock);
+    // Будем ждать соединение с любым адресом
+    sock.sin_addr.s_addr = 0;
+    // Сопоставим наш локальный адрес с сокетом
+    if (bind(lsock, (struct sockaddr*) &sock, sizeof(sock)))  {
+       printf("Talk: Error binding to port (%d).. Error %d\n",TalkPort,WSAGetLastError());
+       free(bs);     WinSockClose();
+       return -7;
+      } 
+     else printf("Talk: Port (%d) bound to socket [%ld] for talk service..\n",TalkPort,lsock);
+    // Установим max. количество создаваемых сокетов	
+    if (listen(lsock, MaxConn)) {
+       printf("Talk: Error listening on socket.. Error %d\n",WSAGetLastError());
+       free(bs);        WinSockClose ();
+       return -8;
+      } 
+     else printf ("Talk: Now listening on socket [%ld] for incoming connections..\n",lsock);
+    ErrCode = sizeof(fromsock);
+    // Ждем подключения к нашему 'Серверу'
+    if ((client = accept(lsock, (struct sockaddr*) &fromsock, &ErrCode)) == INVALID_SOCKET) {
+       if ((ErrCode = WSAGetLastError()) != WSAEINPROGRESS){
+          printf("Talk: Interrupt detected, Closing.. Result (%d)\n",ErrCode);
+	  free(bs);   stopTCP(lsock);    WinSockClose ();
+          return -9;
+         }
+      } 
+    else memcpy(bs, &client, sizeof(SOCKET));
+   }
+  else memcpy(bs, &lsock, sizeof(SOCKET));
+
+ printf("Talk: Connect...\n");
+// Создадим два процесса. На передачу и прием данных.
+ if ((_beginthread(doSend, 4096, bs) < 0) || (_beginthread(doReciv, 4096, bs) < 0))   {
+    printf("Talk: Error creating thread, connection will be closed..\n");
+    free(bs);     stopTCP(lsock);    WinSockClose();
+    return -10;
+   }
+ clrscr();  gotoxy(1,13);
+ for(int i=0; i<80; i++) printf("=");
+// Ждем пока оба процесса не закончат работу
+ while(signal){}
+ clrscr();  printf("Talk: Disconnect...\n");
+ free(bs);  stopTCP(lsock);  WinSockClose();
+ return 0;
+}
+// ================================
+</font>
+</pre>
+</div></div>
+<p>При успешном получении исполняемого файла talk.exe, запустим его в двух окнах с указанием IP-адреса ЭВМ, с которой будем обмениваться данными. Например talk.exe 127.0.0.1. Передаваемый текст отображается в верхней части экрана, а принимаемый в нижней (рис.8.2). </p>
+<p><img src="img/image051.gif"></p>
+
+<br><br>
+<!--конец-->
+      
+				
+
+				</div>
+			</div>
+			
+      </div>
+    </div>
+  </div>
+	
+	<!--Меню навигации по Темам -->	
+	<div aria-label="..." class = "nav-menu">
+	 <ul class="pager background-transition-slow">
+		 <li title="Наверх" style = "margin-right:15px;	"><a class = "glyphicon glyphicon-menu-up page-scroll" href="#page-top"></a></li>
+		 <li title="К предыдущей лекции"><a class = "glyphicon glyphicon-menu-left page-scroll" href="lec7.htm"></a></li>
+		 <li title="В содержание"><a class = "glyphicon glyphicon-list-alt" href="lec_index.htm"></a></li>
+		 <!--li title="К следующей лекции"><a class = "glyphicon glyphicon-menu-right page-scroll" href="lec9.htm"></a></li-->
+	 </ul>
+	</div>
+	<!---->
+	
+	</div>
+  <!-- jQuery -->
+  <script src="../lib/js/jquery.js"></script>
+
+  <!-- Bootstrap Core JavaScript -->
+  <script src="../lib/js/bootstrap.min.js"></script>
+
+  <!-- Scrolling Nav JavaScript -->
+  <script src="../lib/js/jquery.easing.min.js"></script>
+  <script src="../lib/js/scrolling-nav.js"></script>
+
+</body>
+
+</html>

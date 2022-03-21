@@ -1,0 +1,990 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="do.sibsutis.ru">
+
+  <title>ТЕМА 6. Конспект лекций</title>
+	
+	<link rel="icon" type="image/png" href="../lib/css/favicon.png">
+  <!-- Bootstrap Core CSS -->
+  <link href="../lib/css/bootstrap.css" rel="stylesheet">
+	
+  <!-- Custom CSS -->
+  <link href="../lib/css/scrolling-nav.css" rel="stylesheet">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+<!-- The #page-top ID is part of the scrolling feature - the data-spy and data-target are part of the built-in Bootstrap scrollspy function -->
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+  <!-- Navigation -->
+<nav class="navbar navbar-default navbar-fixed-top">
+ <div class="container">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+   <li class="hidden"> <a class="page-scroll" href="#page-top"></a> </li>
+	 
+	 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+   </button>
+	 
+   <a class="navbar-brand " href="../index.htm"> 
+  <text class = "hidden-xs">Сетевое программирование</text> 
+  <text class = "visible-xs">СП</text>
+	 </a>
+  </div>
+
+  <!-- Collect the nav links, forms, and glyphicon glyphicon-list-alt content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+   
+	 <!-- <ul class="nav navbar-nav">
+		<li><a href="#"></a></li> 
+   </ul> -->
+	
+   <ul class="nav navbar-nav navbar-right">
+    <li class="dropdown">
+		<button type="button" class="navbar-toggle dropdown-toggle hidden-xs" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>	   
+		<a class = "dropdown-toggle visible-xs" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Материалы</a>
+     <ul class="dropdown-menu">
+<li><a href="../index.htm">Аннотация курса</a></li>
+
+      <li role="separator" class="divider"></li>
+    
+  <li><a href="lec_index.htm">Теория</a></li>
+   
+   <li><a href="c_work.htm">Курсовая работа</a></li>
+ 
+<li><a href="labs.htm">Лабораторные работы</a></li> 
+    <li role="separator" class="divider"></li>
+  
+    
+    <li><a href="lit.htm">Литература</a></li>
+ 
+      <!--li><a href="q.htm">Вопросы для самопроверки</a></li-->			
+     </ul>
+ </li>
+ </ul>
+  </div><!-- /.navbar-collapse -->
+ </div><!-- /.container-fluid -->
+</nav>
+
+
+  <div id="intro" class="section content-section ">
+    <div class="container">
+       <div class="row">
+        <div class="col-lg-12">	
+
+
+<!-- содержание -->	
+<div class="page-header">				
+<h3><a href="#">ТЕМА 6. ПРОГРАММИРОВАНИЕ ОБМЕНОВ В ПРОМЫШЛЕННЫХ СЕТЯХ НА ОСНОВЕ ИНТЕРФЕЙСА RS-232C, RS-485</a></h3>
+<a href="#1" class=punkt>6.1. Программирование интерфейса RS-232C</a><br>
+<a href="#2" class=punkt>6.2. Программирование протокола BSC</a><br>
+<a href="#3" class=punkt>6.3. Программирование протокола Modbus RTU</a><br>
+
+</div>
+<!--начало-->
+<p>В промышленных сетях наиболее популярными являются сети с применением физического интерфейса RS485 или RS232. Популярность таких сетей объясняется, прежде всего, большим количеством оборудования, которые имеют встроенный физический интерфейс RS485 или RS232.</p>
+<p>Управление передачей в интерфейсах RS-232C, RS-485 и RS-422 выполняется по одинаковым принципам и алгоритмам. Поэтому остановимся на рассмотрении управления обменом интерфейса RS-232C.</p> 
+<br>
+<a name=1 class="anchor"></a>
+<h3>6.1. Программирование интерфейса RS-232C</h3>
+<p>Интерфейс RS-232C   порт последовательной передачи данных. Последовательная передача данных означает, что данные передаются с использованием единственной линии. Скорость передачи измеряется в бодах, где бод - это количество передаваемых битов в секунду. Для приема и передачи данных по последовательной линии компьютер IBM  PC оснащен четырьмя портами последовательной передачи. Их называют еще асинхронными портами RS-232C или COM портами. Каждому порту соответствует свой асинхронный адаптер   COM1÷COM4. Полный стандарт RS-232C включает 25 линий, но на практике используется только часть из них. Соответственно, компьютер оснащен 2-мя типами разъемов – 25 контактный и 9 контактный (таблица 5.1):</p>
+<p class=punkt>Таблица 6.1</p>
+<div class="row">
+<div class="col-lg-7">
+<table class="table table-hover table-condensed table-striped">
+ 
+<tr>
+ <td width=100 rowspan=1 valign=top>
+<p><b>№ контакта</b></p>
+ </td>
+ 
+<td width=300 colspan=1 valign=top>
+ <p><b>Назначение контакта</b></p>
+ </td>
+
+<td width=100 colspan=1 valign=top>
+ <p><b>Вход или выход</b></p>
+ </td>
+
+</tr>
+ 
+<tr>
+ <td width=100 rowspan=1 valign=top>
+<p>1</p>
+ </td>
+ 
+<td width=300 colspan=1 valign=top>
+ <p>Детектор входного сигнала (DCD)</p>
+ </td>
+
+<td width=100 rowspan=1 valign=top>
+<p>вход</p>
+ </td>
+ </tr>
+ 
+<tr>
+ <td width=100 rowspan=1 valign=top>
+<p>2</p>
+ </td>
+ 
+<td width=300 colspan=1 valign=top>
+ <p>Принимаемые данные (RD)</p>
+ </td>
+
+<td width=100 rowspan=1 valign=top>
+<p>вход</p>
+ </td>
+ </tr>
+ 
+<tr>
+ <td width=100 rowspan=1 valign=top>
+<p>3</p>
+ </td>
+ 
+<td width=300 colspan=1 valign=top>
+ <p>Передаваемые данные (TD)</p>
+ </td>
+
+<td width=100 rowspan=1 valign=top>
+<p>выход</p>
+ </td>
+ </tr>
+ 
+<tr>
+ <td width=100 rowspan=1 valign=top>
+<p>4</p>
+ </td>
+ 
+<td width=300 colspan=1 valign=top>
+ <p>Готовность выходных данных (DTR)</p>
+ </td>
+
+<td width=100 rowspan=1 valign=top>
+<p>выход</p>
+ </td>
+ </tr>
+ 
+<tr>
+ <td width=100 rowspan=1 valign=top>
+<p>5</p>
+ </td>
+ 
+<td width=300 colspan=1 valign=top>
+ <p>Сигнальное заземление (SG)</p>
+ </td>
+
+<td width=100 rowspan=1 valign=top>
+<p>-</p>
+ </td>
+ </tr>
+ 
+<tr>
+ <td width=100 rowspan=1 valign=top>
+<p>6</p>
+ </td>
+ 
+<td width=300 colspan=1 valign=top>
+ <p>Готовность данных (DSR)</p>
+ </td>
+
+<td width=100 rowspan=1 valign=top>
+<p>вход</p>
+ </td>
+ </tr>
+ 
+<tr>
+ <td width=100 rowspan=1 valign=top>
+<p>7</p>
+ </td>
+ 
+<td width=300 colspan=1 valign=top>
+ <p>Запрос для передачи (RTS)</p>
+ </td>
+
+<td width=100 rowspan=1 valign=top>
+<p>выход</p>
+ </td>
+ </tr>
+ 
+<tr>
+ <td width=100 rowspan=1 valign=top>
+<p>8</p>
+ </td>
+ 
+<td width=300 colspan=1 valign=top>
+ <p>Сброс для передачи (CTS)</p>
+ </td>
+
+<td width=100 rowspan=1 valign=top>
+<p>вход</p>
+ </td>
+ </tr>
+ 
+<tr>
+ <td width=100 rowspan=1 valign=top>
+<p>9</p>
+ </td>
+ 
+<td width=300 colspan=1 valign=top>
+ <p>Индикатор вызова (RI)</p>
+ </td>
+
+<td width=100 rowspan=1 valign=top>
+<p>вход</p>
+ </td>
+ </tr>
+ 
+</table></div></div>
+
+<br>
+<p>Передача данных между компьютерами организовывается либо непосредственным соединением COM-портов физической линией, либо при значительных расстояний между компьютерами с использованием телефонных или оптоволоконных линий связи. </p>
+<p>Для последовательной передачи требуется только две линии (два провода). По одному проводу информация передается, а по другому принимается. Провод с одной стороны подсоединен к передающему контакту разъема TxD, а с другой стороны к принимающему RxD.  Кроме того, необходимо соединить контакты «Сигнальное заземление» SG.</p>
+<p><img src="img/image037.gif"></p>
+<p>Рис.6.1. Схема соединения между двумя СОМ-портами для RS-232C</p>
+<br>
+<p>Для синхронизации перед группой битов, составляющих единицу передаваемых данных (например, группа из 8 бит данных составляет байт), обычно предшествует специальный стартовый бит. После группы битов следует бит проверки на четность и один или два стоповых  бита. Иногда бит проверки на четность может отсутствовать. Формат  передачи  показан на рисунке:</p>
+<p><img src="img/image038.gif"></p>
+<p>Рис 6.2. Формат  передаваемого кадра</p>
+<br>
+<p><b>6.1.1. Описание регистров интерфейса RS-232C</b></p>
+<p>Каждый из 4-х асинхронных портов имеет одинаковую группу регистров, доступ к которым осуществляется через соответствующие порты. Базовые адреса и диапазоны занимаемых адресов показаны в таблице 6.2.</p>
+<p>Таблица 6.2</p>
+<p><img src="img/image039.gif"></p>
+<p>Асинхронные адаптеры могут вырабатывать следующие прерывания:</p>
+<p class=punkt>COM1 и COM3 - IRQ4 (соответствует INT 0Ch)</p>
+<p class=punkt>COM2 и COM4 - IRQ3 (соответствует INT 0Bh).</p>
+<p>Каждый асинхронный адаптер управляется 10-ю внутренними регистрами. Обращение к регистрам производится по их адресам, называемыми портами ввода/вывода. Для COM1 регистры имеют следующие адреса портов:</p>
+<p class=punkt>3F8h (OUT, бит 7 = 0 в 3FBh)   Регистр данных передатчика
+<p class=punkt>3F8h (IN,  бит 7 = 0 в 3FBh)      Регистр данных приемника
+<p class=punkt>3F8h (OUT, бит 7 = 1 в 3FBh)    Делитель скорости обмена - младший байт
+<p class=punkt>3F9h (IN,  бит 7 = 1 в 3FBh)      Делитель скорости обмена - старший байт
+<p class=punkt>3F9h (OUT, бит 7 = 0 в 3FBh)     Регистр разрешения прерывания
+<p class=punkt>3FAh (IN)                       Регистр идентификации прерывания
+<p class=punkt>3FBh (OUT)                   Регистр управления линии
+<p class=punkt>3FCh (OUT)                   Регистр управления модемом
+<p class=punkt>3FDh (IN)                       Регистр статуса линии
+<p class=punkt>3FEh (IN)                       Регистр статуса модема
+<p><b>Порт 3F8h. Регистры данных и скорости </b></p>
+<p>В зависимости  от состояния старшего бита в управляющем регистре (порт 3FBh), назначение порта 3F8h может меняться.  Если этот бит равен 0,  порт используется для передачи данных. Если этот бит равен 1, порт используется для вывода значения младшего байта делителя частоты тактового генератора управления обменом. Изменяя содержимое делителя, можно изменять скорость передачи данных (таблица 6.3).</p>
+<p>Таблица 6.3 </p>
+<p><img src="img/image040.gif"></p>
+<p><b>Порт 3F9h. Регистр управления прерываниями.</b></p>
+<p>Регистр  используется либо для управления прерываниями от асинхронного адаптера, либо ( в случае, если старший бит порта 3FBh был установлен в “1”) для вывода значения старшего байта делителя частоты тактового генератора. В режиме регистра управления прерыванием порт имеет следующий формат (таблица 6.4):</p>
+<p>Таблица 6.4.</p>
+<p><img src="img/image041.gif"></p>
+<p><b>Порт 3FAh. Регистр идентификации прерывания.</b></p>
+<p>Содержимое регистра (таблица 6.5) определяет причину прерывания:</p>
+<p>Таблица 6.5.</p>
+<p><img src="img/image042.gif"></p>
+<p><b>Порт 3FBh. Управляющий регистр.</b></p>
+<p>Управляющий регистр доступен по записи и чтению. Этот регистр устанавливает скорость передачи данных,  контроль четности, длину передаваемых символов (таблица 6.6):</p>
+<p>Таблица 6.6.</p>
+<p><img src="img/image043.gif"></p>
+<p><b>Порт 3FDh. Регистр состояния линий</b></p>
+<p>Регистр состояния  линий определяет состояние приемо/передатчика и причину ошибок, которые могут произойти в процессе выполнения передачи или приема (таблица 6.7):</p>
+<p>Таблица 6.7.</p>
+<p><img src="img/image044.gif"></p>
+<p><b>6.1.3 Описание процедур программирования асинхронного адаптера</b></p>
+<p><i><b>Инициализация асинхронного адаптера </b></i></p>
+<p>При выполнении инициализации программа, работающая с асинхронным адаптером, должна в первую очередь установить формат и скорость передачи данных. Приведем пример программы инициализации COM-порта. С цель простоты восприятия, фрагмент программы покажем на языке С в среде DOS, позволяещему непосредственно обращаться к регистрам порта.</p>
+<div class="row"><div class="col-lg-9">
+<pre class="code">
+<font size=3.5>
+/* *** инициализация COM-порта *** */
+ void init_port()  {
+     ctl = inp(0x3fb);
+     //установка бита доступа к регистру делителя частоты 
+     outp(0x3fb, ctl | 0x80); 
+     // записываем значение делителя частоты
+     outp(0x3f9, 0x00);
+     outp(0x3f8, 0x0C); // скорость 9600 бод
+    // устанавливаем характеристики обмена - 8 бит,1 стоп, четность
+    outp(0x3fb, 0x1b); // 0001.1011
+}
+</font>
+</pre>
+</div></div>
+<p><i><b>Передача данных</b></i></p>
+<p>Перед записью байта данных в регистр передатчика, необходимо убедиться, что  регистр передатчика свободен, т.е. убедиться в том, что передача предыдущего символа завершена.</p>
+<p>Признаком того, что регистр передатчика свободен, является установленный в "1" бит 5-го разряда  регистра состояния линии с адресом <b>baseadr + 5 (3FDh)</b>. </p>
+<p>Приведем пример функции, которая ждет окончания передачи текущего символа, затем посылает в асинхронный адаптер следующий символ:</p>
+<div class="row"><div class="col-lg-9">
+<pre class="code">
+<font size=3.5>
+/* *** вывод символа в порт *** */
+void  send_sym (char ch)  {
+    unsigned   out_reg, status_reg;
+    status_reg = 0x3fd;
+    out_reg = 0x3f8;
+    while( (inp(status_reg) & 0x20) == 0);
+    outp(out_reg, ch);
+ }
+</font>
+</pre>
+</div></div>
+<p><b><i>Прием данных</i></b></p>
+<p>Аналогично передаче данных, перед вводом символа из регистра  данных (адрес baseadr), необходимо  убедиться в том, что бит 0 регистра состояния линии (адрес baseadr+5(0x3fd)) установлен в 1. Это  означает,  что символ принят из линии и находится в буферном регистре приемника.</p>
+<p>Для приема данных может быть использована следующая функция:</p>
+<div class="row"><div class="col-lg-9">
+<pre class="code">
+<font size=3.5>
+char receiv() {
+     unsigned   inp_reg, status_reg;
+     status_reg = 0x3fd;
+     inp_reg = 0x3f8;
+     while( (inp(  status_reg) & 1) == 0);
+     return (inp(inp_reg));
+}
+</font>
+</pre>
+</div></div>
+<p><b><i>Пример программы передачи данных</i></b></p>
+<p>Приведем пример программы, использующей описанные выше функции для передачи по  линии связи символов с клавиатуры  в режиме опроса регистра состояния.  Для проверки работы программы необходимо соединить выход асинхронного адаптера (контакт 2 разъема) с его входом (контакт 3 разъема).</p>
+<div class="row"><div class="col-lg-9">
+<pre class="code">
+<font size=3.5>
+#include <stdio.h>
+#include <conio.h>
+#include <dos.h>
+
+void main(void)  {
+  init_port();
+  while(1)  {
+   // Вводим символ с клавиатуры. Выход из программы при нажатии ESC (код=27)
+	char ch;
+	if ((ch=getch())=27) return;
+   // Передаем его в асинхронный адаптер
+      send_sym (ch);
+       // Вводим символ из асинхронного адаптера и отображаем его на экране
+      putchar(receiv());
+      }
+ }
+</font>
+</pre>
+</div></div>
+<p>6.1.4. Использование прерываний в программах управления асинхронного адаптера</p>
+<p>Так как процесс последовательной передачи данных протекает достаточно медленно, имеет смысл выполнять его в фоновом режиме, используя прерывания по окончании приема и/или передачи символа. </p>
+<p>Напомним основы организации обработки прерываний.</p>
+<p>Для каждого типа прерывания у процессора есть программа, которую он должен выполнить, обслуживая данное прерывание.</p>
+<p>Адреса этих программ находятся в 256 – элементной таблице. Каждый её элемент состоит из четырёх байт и содержит значения регистров IP и СS, соответствующие началу программ для конкретных типов прерываний.</p>
+<p>Таблица начинается с адреса памяти 0, как показано на рисунке 6.3. Программы, выполняющиеся при возникновении прерывания, называются <i>программа обработки прерываний</i> (ПОП).</p>
+<p><img src="img/image045.gif"></p>
+<p>Рис.6.3. Структура механизма прерываний</p>
+<br>
+<p>Для установки возможности выполнять прерывания необходимо установить режим разрешения прерываний от COM-порта. Для этого требуется записать “0” в соответствующий бит регистра контроллера прерывания. Для IRQ3 (COM1) это 3-ий бит, а для IRQ4 (COM2)   4-ый. Доступ к регистру контроллера прерываний осуществляется через порт 0x21:</p>
+<div class="row"><div class="col-lg-9">
+<pre class="code">
+<font size=3.5>
+/* *** функция инициализации контролера прерывания *** */
+void init_ctrl()  {
+     int_save = inp(0x21);
+     outp(0x21,int_save & 0x0e7); 0x0e7=11100111
+}
+</font>
+</pre>
+</div></div>
+<p>Кроме того, при инициализации COM-порта необходимо:</p>
+<p>- установить в “1” биты регистра управления прерываниями (baseaddr+1) по вводу или выводу в соответствии с тем, какие прерывания мы желаем обрабатывать:</p>
+<p class=punkt>      char imask = 0x03; 		// 0x3 = 0000.0011
+<p class=punkt>      outp(0x3f9,  imask;
+<br> 
+<p>-  установить в регистре управления модемом разрешение на прерывание от адаптера; 
+<p>- установить биты сигналов DTR и RTS
+
+<p class=punkt>     outp(0x3fc,  0x0b);                 // 0xb = 0000.1011
+</p>
+<p>Стандартный обработчик прерывания можно извлечь из таблицы векторов прерываний и сохранить:</p>
+<p class=punkt>     оld_hendler=getvect (0x0C).</p>
+<p>На его место в таблице векторов прерываний устанавливается пользовательская программа-обработчик прерывания путем с помощью функции   <b>setvect()</b>:</p>
+<p class=punkt>     setvect (0x0C, handler); </p>
+<p>Когда произойдет прерывание, программа-обработчик должна проанализировать  причину прерывания,  прочитав содержимое регистра идентификации прерывания с адресом </p>
+<p class=punkt>     baseadr+2(0x3FA). </p>
+<p>В конце программы-обработчика аппаратного прерывания необходимо поставить последовательность команд  обозначающую завершение аппаратного прерывания:</p>
+<p class=punkt>     outp (0x20, 0x20); </p>
+<p>В противном случае возможно "зависание" программы. </p>
+<p>Так как одновременно может произойти несколько прерываний. В этом случае бит “0” регистра идентификации прерываний будет установлен в “1”. Если такая ситуация имеет место, перед завершением обработки прерывания надо снова прочитать регистр идентификации прерываний и  обработать следующее  прерывание.  Так следует поступать до тех пор,  пока бит “0” регистра идентификации прерываний не станет равным единице.
+<p>ТПример фрагмента программы, включающей программу обработки прерываний – receiv():
+</p>
+<div class="row"><div class="col-lg-9">
+<pre class="code">
+<font size=3.5>
+#include <stdio.h>
+#include <conio.h>
+#include <dos.h>
+#define base  0x3F8  // порт COM1
+
+ char ctl; int_save;
+     /* объявление программы обработки прерываний */
+void interrupt  receiv(void);
+          /* *** инициализация COM-порта *** */
+void init_port()  {
+     ctl = inp(base+3);
+     outp(base+3, ctl | 0x80); // уст. ст. бит режима
+     outp(base+1, 0x00);       // записываем значение делителя частоты 
+     outp(base+0, 0x0C);      // скорость 9600 бод
+     outp(base+3, 0x1b); // характеристики обмена - 8 бит,1 стоп, четность – 0001.1011
+     outp(base+1,  0x01);     // уст. регистр управления прерыванием по вводу
+     outp(base+4,  0x0b);     // уст. регистр управления modem прерывания 
+     }
+              /* *** инициализация контролера прерывания *** */
+void init_ctrl()  {
+     int_save = inp(0x21);
+     outp(0x21,int_save & 0x0E7);
+ }
+/* уст. нового обработчика */
+void set_vect()  
+   {  setvect (0x0C, receiv); }
+/* *** новый обработчик *** */
+void interrupt receiv() {
+     char ch;
+     inp_reg = base+0;
+     ch = inp(inp_reg);  // прием символа из линии связи
+   // вывод на экран принятого по линии связи символа.
+     _AL = ch;  _AH = 0x0E; _BX = 0;      geninterrupt(0x10);
+   //завершение аппаратного прерывния
+     outp (0x20, 0x20);
+ }
+/* *** вывод символа в порт *** */
+void  send_sym (char ch)  {
+. . . . . . . . . . . . . . . . . . . . . . . . . . .
+}
+/* *** основная программа *** */
+void  main()  {
+   char ch;
+    set_vect();
+    init_port();
+    init_ctrl();
+    printf ("\n Инициализация  COM-порта  произведена.  Нажмите  любую клавишу...\n");
+     while ((ch = getch())!=27)
+     {    send_sym(ch); }
+ }
+</font>
+</pre>
+</div></div>
+<p>Программа будет выводить в СОМ-порт символ набранный на клавиатуре и отображать на дисплее символ принятый по линии связи. Отметим, что вызов DOS-прерывания   из другого DOS-прерывания не рекомендуется, поэтому отображение принятого символа в обработчике прерываний выполняется с помощью BIOS-прерывания 0х10.</p>
+<br>
+<a name=2 class="anchor"></a>
+<h3>6.2. Программирование протокола BSC </h3>
+<p>Каждый передаваемый информационный блок обрамляется служебными символами (п.3.2). Информация выводится двумя блоками – блок заголовка и блок данных (Рис.6.4). Блок данных может быть разбит на несколько пакетов. Блок заголовка предваряется  символами  DLE-SOH, а каждый пакет данных символами DLE-STX. Все промежуточные пакеты завершаются символами  DLE-ETB, а последний пакет символами DLE-ETX.</p>
+<p><img src="img/image046.gif"></p>
+<p>  Рис.6.4. Форматы пакетов: a) заголовка; b) данных</p>
+<br>
+<p>Процедура передачи сообщения (рис.2) состоит из 4-х этапов:</p>
+<p class=punkt>-	установки связи в режиме handshake
+<p class=punkt>-	передачи заголовка
+<p class=punkt>-	передачи данных
+<p class=punkt>-	завершения связи	
+<p>Подтверждение выполнения каждого этапа производится последовательно чередующимися символами четного (ACK0) и нечетного (ACK1) подтверждения. Не подтверждение – символом NAK.</p>
+<p>Установка связи заключается в посылке символа запроса – ENQ и получения положительного подтверждения ACK0.</p>
+<p>   Завершение связи производится посылкой символа EOT  получением подтверждения – ACK0 или ACK1.</p>
+<br>
+<p><b><i>Пример1. Программирование в среде DOS</i></b></p>
+<p>Рассмотрим пример программы пересылки пакета заголовка. Текстом заголовка в примере будет - "Hello!". Старт передачи по нажатию клавиши F1(код 59), а выход из программы по ESC (код 27).  В тексте такие функции как init_port – функции инициализации, set_vect  – установка пользовательского  обработчика прерываний,  send_sym  – вывод символа в порт не приведены, т.к. они подробно описаны в п.3.2. </p>
+<p>Текст программы:</p>
+<div class="row"><div class="col-lg-10">
+<pre class="code">
+<font size=3.5>
+#include <stdio.h>
+#include <conio.h>
+#include <dos.h>
+#include <dir.h>
+struct ffblk ffblk;
+int f_d=0,   // Здесь будем фиксировать прием символа DLE
+j=0;	      // номер передаваемого  символа данных	
+i=0;	      // счетчик принятых символов данных 	
+char ctl, in_sv, f1=0;
+void interrupt receiv(void); // Объявление процедуры прерывания
+char in_buf[80]={}; // Буфер ввода
+char out_buff[10]={"Hello!"};       // Буфер вывода 
+// Определим коды, соответствующие управляющим символам
+#define DLE    0x10
+#define ENQ    0x05
+#define SOH    0x01
+#define ETB     0x17
+#define ACK0  0x06
+#define ACK1  0x08
+#define EOT     0x04
+
+          /* *** инициализация COM-порта *** */
+void init_port()  {
+// Здесь текст функции инициализации
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+ }
+/* уст. нового обработчика */
+ void set_vect()   
+ {
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+ }
+       /* *** вывод символа в порт *** */
+ void  send_sym (char ch)  
+ {
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+ }
+/* Обработчик прерывания по вводу символа. В этой процедуре реализован механизм байтстаффинга.
+void interrupt receiv() {
+     char ch;
+     unsigned   inp_reg;
+     inp_reg = 0x3F8;
+
+     ch=inp(inp_reg);     //пpием символа из порта данных
+/* Процедура вывода принятого символа на экран, реализованная с помощью функции BIOS */       
+_AL=ch; _AH=0x0e; _BX=0; geninterrupt(0x10);
+/* Учет режима байтстаффинга   
+ if(f_d=0)    /* если флаг  DLE не установлен, т.е. предыдущий  
+                         принятый символ был не DLE */
+ {      
+     if(ch=DLE) f_d=1; // если принят символ DLE установим флаг
+     else  buf[i++]=ch;  // иначе символ положим в буфер
+  }
+ else  /* если флаг  DLE  установлен, т.е. предыдущий  
+ {                       принятый символ был  DLE */
+         if(ch=DLE) // если принят DLE, то это символ данных 
+         {  f_d=0; buf[i]=ch; i++;}// положим в его в буфер 
+         else  /* символ после DLE – управляющий. Код, принятого 
+                     управляющего символа заносим в переменную f1
+         и сбросим флаг приема DLE */
+        {  f_d=0; 
+if(ch==ENQ)   f1=ENQ;
+             if(ch==SOH) { f1=SOH;  i=0;}
+             if(ch==ETB) { f1=ETB; }
+             if(ch==ACK0) f1=ACK0;
+             if(ch==ACK1) f1=ACK1;
+  }
+   outp (0x20,0x20);
+}
+void main(void)
+{
+ char ch;
+ clrscr();         // Очистим экран
+ init_port();    // Установим параметры COM порта
+ set_vect();    //  Заменим вектор прерывания COM порта
+printf("F1-start, ESC-exit\n");
+   for(;;)
+    {
+       while(!kbhit())
+       //если не нажата никакая клавиша пpовеpяем содержимое f1
+        {
+          // если принят ENQ, отошлем подтверждение ACK0 
+          if(f1==ENQ)
+                 {f1=0; printf("RECEIVE ENQ\n");
+                  send_sym (DLE);send_sym (ACK0); }
+         /* если принят ACK0, передадим в линию пакет заголовка 
+             с управляющими символами начала и конца заголовка */ 
+           if(f1==ACK0)
+                 { f1=0;printf("RECEIVE ACK0\n");
+                    send_sym(DLE); send_sym(SOH);
+                    for(i=0; i<6; i++)
+                      {
+                        send_sym(out_buf[i]);
+                      }
+                   send_sym(DLE); send_sym(ETB);
+                 }
+/* если принят ETB, выведем на экран содержимое входного буфера in_buf и отошлем подтверждение ACK1*/ 
+           if(f1==ETB)
+                 { f1=0; printf("RECEIVE ETB\n");
+                   for(i=0; i<10; i++) putch(in_buf[i]);
+                   send_sym(DLE);  send_sym(ACK1);
+                 }
+            if(f1==ACK1)
+                 { f1=0; printf("RECEIVE ACK1\n");}
+        }
+       //если нажата клавиша
+           ch=getch();
+            if(ch==27) return;
+/* Если нажать F1, то послать символ ENQ – запрос на установление связи */
+            if(ch==59)    // Нажата клавиша F1
+                 { send_sym (DLE);send_sym (ENQ);}
+       }
+}
+</font>
+</pre>
+</div></div>
+<p><b><i>Пример2. Программирование в среде Visual C++ </i></b></p>
+<p>Приведем пример  программы взаимодействия двух машин. В исходном состоянии машины ждут ввода с клавиатуры команды запроса – pwd. Окончание ввода команды и ее отправка определяется клавишей <Enter>. На приемной стороне в ответ на принятую команду формируется и отправляется в канал текстовое сообщение с полным именем текущей директории. Передающая сторона принимает этот текст и отображает его на экране. Установление связи, передача данных и завершение связи выполнять в соответствии с протоколом BSC. Завершение работы при нажатии ESC.</p>
+<p><i><b>Описание программы.</b></i></p>
+<p>Программа написана в среде Visual C++ 2010 в виде консольного windows приложения. В качестве аргумента принимается имя COM-порта для работы. При тестировании использовался null modem COM10 - COM11. После открытия и настройки порта, программа ожидает входящего соединения или нажатия клавиш – F1 – для отправки данных, ESC – для выхода. При нажатии F1, программа устанавливает соединение, отправляет пакет с заголовком, пакет с данными, и закрывает соединение. В процессе работы программа выводит коды полученных символов. При окончании передачи заголовка и текстовых данных, программа также выводит их на экран (рис.6.5).</p>
+<p>Текст программы.</p>
+<div class="row"><div class="col-lg-11">
+<pre class="code">
+<font size=3.5>
+#include <iostream>
+#include <conio.h>
+#include <direct.h>
+#include <windows.h>
+using namespace std;
+
+#define SYN		0x16		//синхронизирующий символ
+#define SOH		0x01		//начало заголовка пакета
+#define STX		0x02		//начало текста
+#define ETX		0x03		//конец текста
+#define ETB		0x17		//конец передачи блока (заголовка)
+#define ENQ		0x05		//запрос
+#define ACK0		0x06		//четное подтверждение
+#define ACK1		0x08		//нечетное подтверждение
+#define NAK		0x15		//отрицательная квитанция (переспрос)
+#define EOT		0x04		//конец сеанса связи
+#define DLE		0x10		//спец. управляющий символ
+
+HANDLE hCOM;
+bool dle;
+unsigned char f1;
+char text[1024];
+int text_pos;
+
+void send_char(const char c, bool double_dle = true)
+{
+	DWORD nb = 0;
+	if (c == DLE && double_dle)
+		WriteFile(hCOM, &c, sizeof(c), &nb, 0);
+	WriteFile(hCOM, &c, sizeof(c), &nb, 0);
+}
+void send_control(const char c)
+{
+	send_char(DLE, false);
+	send_char(c);
+}
+void send_text(const char *str)
+{
+	for (int i = 0; i < strlen(str); i++)
+		send_char(str[i]);
+}
+bool recv()
+{
+	unsigned char c = 0;
+	DWORD nb = 0;
+
+	bool res = ReadFile(hCOM, &c, sizeof(c), &nb, NULL);
+	res = res && nb > 0;
+
+	//Читаем из порта 1 байт
+	if (res)
+	{
+		if (!dle)
+		{
+			f1 = 0;
+			if (c == DLE)
+				dle = true;
+			else
+				text[text_pos++] = c;
+		}
+		//Ожидается управляющий символ
+		else
+		{
+			//Обработка управляющих символов
+			if (c == DLE)
+			{
+				//Обработать DLE как обычный символ
+				text[text_pos++] = c;
+			}
+			else
+			{
+				f1 = c;
+				if (c == SOH || c == STX)
+				{
+					text_pos = 0;
+					memset(text, 0, sizeof(text));
+				}
+			}
+			dle = false;
+		}
+		printf("%.2x\t%c\n", c, c);
+	}
+
+	return res;
+}
+
+void close()
+{
+	CloseHandle(hCOM);
+	ExitProcess(0);
+}
+
+void open_port(const char *portname)
+{
+ hCOM = CreateFile(portname, GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+	if (hCOM == INVALID_HANDLE_VALUE)
+	{
+		cout << "Ошибка открытия порта" << endl;
+		close();
+	}
+	const int TIMEOUT = 1000;
+	COMMTIMEOUTS CommTimeOuts;
+    CommTimeOuts.ReadIntervalTimeout = 0xFFFFFFFF;
+    CommTimeOuts.ReadTotalTimeoutMultiplier = 0;
+    CommTimeOuts.ReadTotalTimeoutConstant = TIMEOUT;
+    CommTimeOuts.WriteTotalTimeoutMultiplier = 0;
+    CommTimeOuts.WriteTotalTimeoutConstant = TIMEOUT;
+     if (!SetCommTimeouts(hCOM, &CommTimeOuts)) {
+		cout << "Ошибка настройки порта" << endl;
+		close();
+    }
+}
+
+void reset()
+{
+	dle = false;
+	f1 = 0;
+	text_pos = 0;
+	memset(text, 0, sizeof(text));
+	cout << "\nF1 - начать передачу, ESC - выход\nОжидаем...\n";
+}
+
+void main(int argc, char **argv)
+{
+	setlocale(LC_ALL,".1251");
+
+	if (argc != 2)
+	{
+		cout << "Не задано имя порта" << endl;
+		return;
+	}
+
+	char portname[MAX_PATH] = "\\\\.\\";
+	strcat(portname, argv[1]);
+
+	cout << "Открываем порт " << portname << endl;
+	open_port(portname);
+ 
+	char *headerbuff = "Header text";
+
+	char databuff[MAX_PATH];
+	getcwd(databuff, sizeof(databuff));
+
+	reset();
+	do
+	{
+		if (_kbhit())
+		{
+			char c = getch();
+			if (c == 59)
+				send_control(ENQ);
+			if (c == 27)
+				close();
+		}
+		else
+		if (recv())
+		{
+			switch (f1)
+			{
+			case ENQ:
+				send_control(ACK0);
+				break;
+			case ACK0:
+				send_control(SOH);
+				send_text(headerbuff);
+				send_control(ETB);
+				break;
+			case ETB:
+				cout << text << endl;
+				send_control(ACK1);
+				break;
+			case ACK1:
+				send_control(STX);
+				send_text(databuff);
+				send_control(ETX);
+				break;
+			case ETX:
+				cout << text << endl;
+				send_control(EOT);
+				reset();
+				break;
+			case EOT:
+				reset();
+				break;
+			}
+		}
+	}
+	while (true);
+
+	return;
+}
+</font>
+</pre>
+</div></div>
+<p><img src="img/image047.gif"></p>
+<p>Рис.6.5.Результат работы программы.</p>
+<br>
+<a name=3 class="anchor"></a>
+<h3>6.3. Программирование протокола Modbus RTU</h3>
+<p>В протоколе Modbus RTU передача данных осуществляется по определённому фрейму, который заканчивается двумя байтами контрольной суммы.</p>
+<p>Общий фрейм запроса протокола состоит в следующем:</p>
+<ul class=punkt>
+<li>	первый байт это адрес устройства, к которому адресован запрос. Он может изменяться от 1 до 247. Адрес 0 используется для широковещательной передачи, его распознаёт каждое устройство.  Адреса в диапазоне 248-255  зарезервированы;</li>
+<li>	номер функции – это следующее однобайтное поле кадра. Оно говорит ведомому устройству, какие данные  или выполнение какого действия требует от него ведущее устройство;</li>
+<li>	данные ¬– поле содержит информацию, необходимую ведомому устройству для выполнения заданной мастером функции или содержит данные, передаваемые ведомым устройством в ответ на запрос ведущего. Длина и формат поля зависит от номера функции;</li>
+<li>	блок обнаружения ошибок – контрольная сумма для проверки отсутствия ошибок в кадре.</li>
+</ul>
+<p>Для того чтобы разрабатываемый модуль отправлял запрос по протоколу Modbus RTU, необходимо добавить в него функцию вычисления контрольной суммы.</p>
+<p>Функция вычисления контрольной суммы по алгоритму CRC16 выполнена табличным методом:</p>
+<div class="row"><div class="col-lg-9">
+<pre class="code">
+<font size=3.5>
+unsigned short CRC16 (const unsigned char *nData, int wLength)
+{
+static const unsigned short wCRCTable[] = {
+0X0000, 0XC0C1, 0XC181, 0X0140, 0XC301, 0X03C0, 0X0280, 0XC241,
+0XC601, 0X06C0, 0X0780, 0XC741, 0X0500, 0XC5C1, 0XC481, 0X0440,
+0XCC01, 0X0CC0, 0X0D80, 0XCD41, 0X0F00, 0XCFC1, 0XCE81, 0X0E40,
+0X0A00, 0XCAC1, 0XCB81, 0X0B40, 0XC901, 0X09C0, 0X0880, 0XC841,
+0XD801, 0X18C0, 0X1980, 0XD941, 0X1B00, 0XDBC1, 0XDA81, 0X1A40,
+0X1E00, 0XDEC1, 0XDF81, 0X1F40, 0XDD01, 0X1DC0, 0X1C80, 0XDC41,
+0X1400, 0XD4C1, 0XD581, 0X1540, 0XD701, 0X17C0, 0X1680, 0XD641,
+0XD201, 0X12C0, 0X1380, 0XD341, 0X1100, 0XD1C1, 0XD081, 0X1040,
+0XF001, 0X30C0, 0X3180, 0XF141, 0X3300, 0XF3C1, 0XF281, 0X3240,
+0X3600, 0XF6C1, 0XF781, 0X3740, 0XF501, 0X35C0, 0X3480, 0XF441,
+0X3C00, 0XFCC1, 0XFD81, 0X3D40, 0XFF01, 0X3FC0, 0X3E80, 0XFE41,
+0XFA01, 0X3AC0, 0X3B80, 0XFB41, 0X3900, 0XF9C1, 0XF881, 0X3840,
+0X2800, 0XE8C1, 0XE981, 0X2940, 0XEB01, 0X2BC0, 0X2A80, 0XEA41,
+0XEE01, 0X2EC0, 0X2F80, 0XEF41, 0X2D00, 0XEDC1, 0XEC81, 0X2C40,
+0XE401, 0X24C0, 0X2580, 0XE541, 0X2700, 0XE7C1, 0XE681, 0X2640,
+0X2200, 0XE2C1, 0XE381, 0X2340, 0XE101, 0X21C0, 0X2080, 0XE041,
+0XA001, 0X60C0, 0X6180, 0XA141, 0X6300, 0XA3C1, 0XA281, 0X6240,
+0X6600, 0XA6C1, 0XA781, 0X6740, 0XA501, 0X65C0, 0X6480, 0XA441,
+0X6C00, 0XACC1, 0XAD81, 0X6D40, 0XAF01, 0X6FC0, 0X6E80, 0XAE41,
+0XAA01, 0X6AC0, 0X6B80, 0XAB41, 0X6900, 0XA9C1, 0XA881, 0X6840,
+0X7800, 0XB8C1, 0XB981, 0X7940, 0XBB01, 0X7BC0, 0X7A80, 0XBA41,
+0XBE01, 0X7EC0, 0X7F80, 0XBF41, 0X7D00, 0XBDC1, 0XBC81, 0X7C40,
+0XB401, 0X74C0, 0X7580, 0XB541, 0X7700, 0XB7C1, 0XB681, 0X7640,
+0X7200, 0XB2C1, 0XB381, 0X7340, 0XB101, 0X71C0, 0X7080, 0XB041,
+0X5000, 0X90C1, 0X9181, 0X5140, 0X9301, 0X53C0, 0X5280, 0X9241,
+0X9601, 0X56C0, 0X5780, 0X9741, 0X5500, 0X95C1, 0X9481, 0X5440,
+0X9C01, 0X5CC0, 0X5D80, 0X9D41, 0X5F00, 0X9FC1, 0X9E81, 0X5E40,
+0X5A00, 0X9AC1, 0X9B81, 0X5B40, 0X9901, 0X59C0, 0X5880, 0X9841,
+0X8801, 0X48C0, 0X4980, 0X8941, 0X4B00, 0X8BC1, 0X8A81, 0X4A40,
+0X4E00, 0X8EC1, 0X8F81, 0X4F40, 0X8D01, 0X4DC0, 0X4C80, 0X8C41,
+0X4400, 0X84C1, 0X8581, 0X4540, 0X8701, 0X47C0, 0X4680, 0X8641,
+0X8201, 0X42C0, 0X4380, 0X8341, 0X4100, 0X81C1, 0X8081, 0X4040 };
+unsigned char nT;
+unsigned short CRCW = 0xFFFF;
+   while (wLength--)
+   {
+      nT = *nData++ ^ CRCW;
+      CRCW >>= 8;
+      CRCW ^= wCRCTable[nT];
+   }
+   return CRCW;
+}
+…
+
+ //Основная функция:
+void  main()  {
+   Again:
+   unsigned short crc;
+   clrscr();
+    h=p;
+    int i=-1,t=0;
+    set_vect();
+    init_port();
+    init_ctrl();
+    printf ("\n Инициализация  COM-порта  произведена.\n");
+    printf("\nВведите фрейм запроса:");
+    fflush(stdin);
+    do
+     {
+         i++;
+         scanf("%x",&a[i]);
+         t++;
+     }
+    while (a[i]!='q');
+
+    crc=CRC16(a,t-1);
+   char *f,*f1,*f2;
+   int k;
+   char b[2];
+   ltoa(crc,f,16);
+   strncpy(f1,f,2);
+   b[0]=strtol(f,&f2,16);
+   b[1]=strtol(f1,&f2,16);
+    printf("Для отправки нажмите любую клавишу...");
+    getch();
+    for (i=0;i < t-1;i++)
+    {        send_sym(a[i]);    }
+    for (i=0;i<2;i++)
+    {       send_sym(b[i]);    }
+    printf("\nФрейм ответа:");
+    getch();
+    printf("\nФрейм ответа в hex:");
+    while (h!=p)
+    {         printf("%x ",*h);         *h++;
+     }
+    printf("\nДля продолжения нажмите любую клавишу...");
+    printf("\nДля выхода-ESC...");
+   char c;
+   if ((c=getche())!=27) goto Again;
+ }
+</font>
+</pre>
+</div></div>
+<p>На рисунке 6.6 изображен фрейм запроса, который был введен с клавиатуры и отправлен в порт:</p>
+<ul class=punkt>
+<li>	первый байт – «0x01» – адрес устройства в сети;</li>
+<li>	второй байт – «0x6с» – пользовательская функция вторичногоустройства, в качестве которого испольхуется прибор Omix;</li>
+<li>	третий байт – «0x07» – подфункция, которая позволяет вывести название устройства.</li>
+</ul>
+<p>Контрольная сумма вычисляется программно и прикрепляется в конце пакета. </p>
+<p>Как видно из рисунка, «ответ» прибора – его название «Omix 1.8».</p>
+<p>Для того, чтобы считывать электрические параметры: ток, напряжение или мощность используется функция «0x04». При этом во фрейм запроса добавляются ещё два байта адреса регистра, из которого нужно взять данные. </p>
+<p>Регистры для чтения данных каждой из характеристик вторичного сетевого устройства приводятся в описании устройств.</p>
+<p><img src="img/image048.gif"></p>
+<p>Рис.6.6. Результат работы программы</p>
+<br>
+
+
+
+<br><br>
+<!--конец-->
+      
+				
+
+				</div>
+			</div>
+			
+      </div>
+    </div>
+  </div>
+	
+	<!--Меню навигации по Темам -->	
+	<div aria-label="..." class = "nav-menu">
+	 <ul class="pager background-transition-slow">
+		 <li title="Наверх" style = "margin-right:15px;	"><a class = "glyphicon glyphicon-menu-up page-scroll" href="#page-top"></a></li>
+		 <li title="К предыдущей лекции"><a class = "glyphicon glyphicon-menu-left page-scroll" href="lec5.htm"></a></li>
+		 <li title="В содержание"><a class = "glyphicon glyphicon-list-alt" href="lec_index.htm"></a></li>
+		 <li title="К следующей лекции"><a class = "glyphicon glyphicon-menu-right page-scroll" href="lec7.htm"></a></li>
+	 </ul>
+	</div>
+	<!---->
+	
+	</div>
+  <!-- jQuery -->
+  <script src="../lib/js/jquery.js"></script>
+
+  <!-- Bootstrap Core JavaScript -->
+  <script src="../lib/js/bootstrap.min.js"></script>
+
+  <!-- Scrolling Nav JavaScript -->
+  <script src="../lib/js/jquery.easing.min.js"></script>
+  <script src="../lib/js/scrolling-nav.js"></script>
+
+</body>
+
+</html>
